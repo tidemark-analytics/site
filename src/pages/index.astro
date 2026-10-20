@@ -32,7 +32,7 @@ const ld = [
       <p class="lede">Tidemark is privacy-first web analytics that installs on ordinary PHP hosting. Upload a zip, open <code>/install</code>, and read your traffic on one calm page. No cookies, no stored IP addresses.</p>
       <div class="cta">
         <a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v{site.version}</a>
-        {site.demoUrl ? <a class="btn lg" href={site.demoUrl}>View live demo</a> : <a class="btn lg" href="/install/">See how it installs <Icon name="arrow-right" /></a>}
+        {site.demoUrl ? <a class="btn lg" href={site.demoUrl}>View live demo</a> : <a class="btn lg" href={site.installDocsUrl}>See how it installs <Icon name="arrow-right" /></a>}
       </div>
       <p class="meta">{site.requirements} · SQLite, MySQL, MariaDB or PostgreSQL · no Node, Docker or SSH</p>
       <div class="shot"><Dashboard /></div>
@@ -60,7 +60,7 @@ const ld = [
           <li><b>Add the snippet</b> to your site’s <code>&lt;head&gt;</code>. The dashboard waits for the first pageview, then opens by itself.</li>
           <li><b>Add a cron job</b> in cPanel, only if you want queued ingestion and data retention.</li>
         </ol>
-        <a class="btn" href="/install/">Full install guide <Icon name="arrow-right" /></a>
+        <a class="btn" href={site.installDocsUrl}>Full install guide <Icon name="arrow-right" /></a>
       </div>
       <div class="stack">
         <p class="muted small">Paste this into your site</p>
@@ -131,7 +131,7 @@ const ld = [
         <div class="mark"><Logo variant="mark" /></div>
         <h2>Clear water. Honest numbers.</h2>
         <p class="muted">Download Tidemark, upload it, and see your first visitor in about ten minutes.</p>
-        <div class="cta"><a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v{site.version}</a><a class="btn lg" href="/install/">Install guide</a></div>
+        <div class="cta"><a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v{site.version}</a><a class="btn lg" href={site.installDocsUrl}>Install guide</a></div>
       </div>
     </div>
   </section>

@@ -1,9 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
 ---
 <Base title="You’re on the list" noindex>
   <div class="wrap page-head nf">
     <h1>You’re on the list.</h1>
-    <p class="lede">We’ll send one email when Tidemark Cloud opens. In the meantime, <a href="/install/">Tidemark runs on your own host</a>.</p>
+    <p class="lede">We’ll send one email when Tidemark Cloud opens. In the meantime, <a href={site.installDocsUrl}>Tidemark runs on your own host</a>.</p>
   </div>
 </Base>

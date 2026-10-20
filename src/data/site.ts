@@ -7,6 +7,8 @@ export const site = {
   repoUrl: 'https://github.com/tidemark-analytics/tidemark',
   downloadUrl: 'https://github.com/tidemark-analytics/tidemark/releases/latest',
   demoUrl: '',            // e.g. 'https://demo.tidemarkanalytics.com' — hides the demo button while empty
+  docsUrl: 'https://docs.tidemarkanalytics.com',
+  installDocsUrl: 'https://docs.tidemarkanalytics.com/install/shared-hosting/',
   waitlistAction: '/waitlist.php', // PHP endpoint shipped in /public (see README)
   version: '0.9.2',
   requirements: 'PHP 8.3+',
@@ -14,7 +16,7 @@ export const site = {
 
 export const nav = [
   { href: '/features/', label: 'Features' },
-  { href: '/install/', label: 'Install' },
+  { href: site.docsUrl, label: 'Docs' },
   { href: '/privacy/', label: 'Privacy' },
   { href: '/compare/', label: 'Compare' },
   { href: '/cloud/', label: 'Cloud', badge: 'Soon' },

@@ -11,13 +11,15 @@ npm run package    # build + tidemark-site.zip, ready to upload
 
 ## Deploy to shared hosting
 
+Install instructions live in the docs site, not here: `src/data/site.ts` holds the docs URLs.
+
 Upload the **contents** of `dist/` to the web root (FTP, cPanel File Manager, or unzip `tidemark-site.zip`). `dist/.htaccess` (Apache) adds HTTPS redirect, gzip, caching and security headers.
 
 ## Facts that change
 
 Everything that repeats across pages lives in `src/data/site.ts`: the repository and download URLs, `demoUrl` (empty hides the demo button) and the `version` shown on download buttons. Update `version` when a new Tidemark release ships. Set `SITE_URL` at build time for canonical URLs, the sitemap and Open Graph tags (default `https://tidemarkanalytics.com`).
 
-The feature, install, privacy and comparison pages describe the product. When Tidemark's behaviour changes, update the matching page, and re-check the [comparison table](src/pages/compare.astro) against each competitor's own site now and then.
+The feature, privacy, comparison and cloud pages describe the product. When Tidemark's behaviour changes, update the matching page, and re-check the [comparison table](src/pages/compare.astro) against each competitor's own site now and then.
 
 ## Waitlist
 
