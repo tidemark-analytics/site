@@ -4,10 +4,10 @@
 declare(strict_types=1);
 
 const REPO = 'tidemark-analytics/tidemark';
-const TTL = 3600;
+const TTL = 600;
 
 header('Content-Type: application/json; charset=utf-8');
-header('Cache-Control: public, max-age=900');
+header('Cache-Control: public, max-age=300');
 header('X-Content-Type-Options: nosniff');
 
 $cache = sys_get_temp_dir() . '/tidemark-site-latest-' . md5(__DIR__) . '.json';
@@ -25,23 +25,50 @@ if ($cached && time() - (int) $cached['at'] < TTL) {
     $send($cached);
 }
 
-$body = false;
-$api = 'https://api.github.com/repos/' . REPO . '/releases/latest';
-$headers = ['Accept: application/vnd.github+json', 'User-Agent: tidemark-site'];
+$ua = 'tidemark-site';
+$tag = '';
+
+// 1. github.com/<repo>/releases/latest answers with a redirect to the newest tag. Unlike the API it has no tight anonymous
+//    rate limit, which shared hosts (many sites behind one IP) tend to exhaust.
+$location = '';
+$page = 'https://github.com/' . REPO . '/releases/latest';
 if (function_exists('curl_init')) {
-    $ch = curl_init($api);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_FOLLOWLOCATION => true, CURLOPT_HTTPHEADER => $headers]);
-    $body = curl_exec($ch);
-    if (curl_getinfo($ch, CURLINFO_RESPONSE_CODE) !== 200) {
-        $body = false;
+    $ch = curl_init($page);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_HEADER => true, CURLOPT_NOBODY => true, CURLOPT_FOLLOWLOCATION => false, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_USERAGENT => $ua]);
+    $out = curl_exec($ch);
+    if (is_string($out) && preg_match('/^location:\s*(\S+)/mi', $out, $m)) {
+        $location = $m[1];
     }
-    curl_close($ch);
 } elseif (ini_get('allow_url_fopen')) {
-    $body = @file_get_contents($api, false, stream_context_create(['http' => ['timeout' => 6, 'header' => implode("\r\n", $headers)]]));
+    @file_get_contents($page, false, stream_context_create(['http' => ['method' => 'HEAD', 'follow_location' => 0, 'timeout' => 6, 'header' => "User-Agent: $ua"]]));
+    foreach ($http_response_header ?? [] as $h) {
+        if (stripos($h, 'location:') === 0) {
+            $location = trim(substr($h, 9));
+        }
+    }
+}
+if (preg_match('#/releases/tag/(v?\d+\.\d+\.\d+[^/?\s]*)$#', $location, $m)) {
+    $tag = rawurldecode($m[1]);
 }
 
-$release = is_string($body) ? json_decode($body, true) : null;
-$tag = is_array($release) ? (string) ($release['tag_name'] ?? '') : '';
+// 2. Fall back to the API.
+if ($tag === '') {
+    $body = false;
+    $api = 'https://api.github.com/repos/' . REPO . '/releases/latest';
+    if (function_exists('curl_init')) {
+        $ch = curl_init($api);
+        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_FOLLOWLOCATION => true, CURLOPT_HTTPHEADER => ['Accept: application/vnd.github+json', "User-Agent: $ua"]]);
+        $body = curl_exec($ch);
+        if (curl_getinfo($ch, CURLINFO_RESPONSE_CODE) !== 200) {
+            $body = false;
+        }
+    } elseif (ini_get('allow_url_fopen')) {
+        $body = @file_get_contents($api, false, stream_context_create(['http' => ['timeout' => 6, 'header' => "Accept: application/vnd.github+json\r\nUser-Agent: $ua"]]));
+    }
+    $release = is_string($body) ? json_decode($body, true) : null;
+    $tag = is_array($release) ? (string) ($release['tag_name'] ?? '') : '';
+}
+
 if (preg_match('/^v?(\d+\.\d+\.\d+(?:[-+][\w.]+)?)$/', $tag, $m)) {
     $fresh = ['version' => $m[1], 'url' => 'https://github.com/' . REPO . '/releases/tag/' . rawurlencode($tag), 'at' => time()];
     @file_put_contents($cache, json_encode($fresh), LOCK_EX);

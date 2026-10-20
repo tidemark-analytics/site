@@ -65,6 +65,12 @@ if (crumbs.length) {
           .then((r) => (r.ok ? r.json() : null))
           .then((d) => {
             if (!d || !/^\d+\.\d+\.\d+/.test(d.version || '')) return;
+            // only ever move forward: the page may have been built more recently than the endpoint's cached answer
+            const shown = (document.querySelector('[data-ver]') || {}).textContent || '0.0.0';
+            const n = (v) => v.split(/[.+-]/).slice(0, 3).map((x) => parseInt(x, 10) || 0);
+            const [a, b] = [n(d.version), n(shown)];
+            const diff = a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+            if (diff <= 0) return;
             document.querySelectorAll('[data-ver]').forEach((el) => { el.textContent = d.version; });
             if (typeof d.url === 'string' && d.url.startsWith('https://github.com/')) document.querySelectorAll('a[data-release]').forEach((a) => { a.href = d.url; });
           })

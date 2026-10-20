@@ -6,7 +6,7 @@ const rows = [
   ['User agent', 'Used in memory to derive a visitor id and browser and device type. The raw string is never stored.'],
   ['Visitor id', 'A salted hash of site, IP and user agent. The salt changes every day, so a visitor cannot be followed from one day to the next.'],
   ['What is stored', 'Aggregate-friendly visit rows: pages, referrer, UTM values, country, browser, operating system, device type and any custom events you define.'],
-  ['Where', 'In a database on your own server. Nothing is sent to us or to any third party. The one outbound request is the update check, made about once a day (and optional: one setting turns it off), which asks GitHub for the latest version number and sends no site or visitor data.'],
+  ['Where', 'In a database on your own server. Nothing is sent to us or to any third party. The one outbound request is the update check, made every few hours at most (and optional: one setting turns it off), which asks GitHub for the latest version number and sends no site or visitor data.'],
 ];
 ---
 <Base title="Privacy by construction" description="How Tidemark counts visitors without cookies or stored IP addresses: a daily-rotating salted hash, no raw IPs or user agents in the database, and your data on your server." crumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
