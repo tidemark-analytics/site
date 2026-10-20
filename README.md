@@ -19,7 +19,7 @@ Upload the **contents** of `dist/` to the web root (FTP, cPanel File Manager, or
 
 Everything that repeats across pages lives in `src/data/site.ts`: the repository and download URLs, `demoUrl` (the live demo dashboard; empty hides the demo button) and the `version` shown on download buttons. Update `version` when a new Tidemark release ships. Set `SITE_URL` at build time for canonical URLs, the sitemap and Open Graph tags (default `https://tidemarkanalytics.com`).
 
-The feature, privacy, comparison and cloud pages describe the product. When Tidemark's behaviour changes, update the matching page, and re-check the [comparison table](src/pages/compare.astro) against each competitor's own site now and then.
+The feature, privacy, comparison and cloud pages describe the product. When Tidemark's behavior changes, update the matching page, and re-check the [comparison table](src/pages/compare.astro) against each competitor's own site now and then.
 
 ## Analytics
 
