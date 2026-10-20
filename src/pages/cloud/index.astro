@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Waitlist from '../../components/Waitlist.astro';
+import Icon from '../../components/Icon.astro';
+---
+<Base title="Tidemark Cloud — coming soon" description="Tidemark Cloud is the hosted version of Tidemark: the same privacy-first analytics without running a server. Join the waitlist." crumbs={[{ name: 'Cloud', path: '/cloud/' }]}>
+  <section class="wash cloud-hero">
+    <div class="wrap">
+      <span class="pill warn kicker">Coming soon</span>
+      <h1>Tidemark Cloud</h1>
+      <p class="lede">A hosted Tidemark for people who would rather not run a server. Built on the same code and the same dashboard. Join the list and we’ll write once, when it opens.</p>
+      <div class="box"><Waitlist id="cloud-waitlist" /></div>
+    </div>
+  </section>
+  <section class="section page-body">
+    <div class="wrap">
+      <div class="grid3">
+        <div class="card pad feat"><div class="empty-ico"><Icon name="refresh-cw" /></div><h3>One product, two places to live</h3><p>The goal is that you can start on shared hosting and move to Cloud later, or the reverse. Migration tools aren’t built yet.</p></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="globe" /></div><h3>Regional cells</h3><p>The design is built around regional cells, so data residency (for example in the EU) can be a choice, not an afterthought.</p></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="info" /></div><h3>What isn’t decided</h3><p>Pricing, plans and the launch date. We’ll publish them here when they’re real, not before.</p></div>
+      </div>
+      <p class="muted" style="margin-top:20px">Self-hosting stays free and open source either way.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .cloud-hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); } .cloud-hero h1 { margin-bottom: 16px; }
+  .lede { max-width: 58ch; font-size: 18px; line-height: 1.55; color: var(--ink-2); } .box { margin-top: 28px; }
+</style>

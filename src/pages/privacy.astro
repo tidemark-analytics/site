@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+const rows = [
+  ['Cookies', 'None. The tracking script and its endpoint set no cookies and use no local storage on your visitors’ devices.'],
+  ['IP address', 'Used in memory to derive a visitor id and, optionally, a country. Never written to the database.'],
+  ['User agent', 'Used in memory to derive a visitor id and browser and device type. The raw string is never stored.'],
+  ['Visitor id', 'A salted hash of site, IP and user agent. The salt changes every day, so a visitor cannot be followed from one day to the next.'],
+  ['What is stored', 'Aggregate-friendly visit rows: pages, referrer, UTM values, country, browser, operating system, device type and any custom events you define.'],
+  ['Where', 'In a database on your own server. Nothing is sent to us or to any third party. The one outbound request is the optional update check an administrator triggers, which asks GitHub for the latest release and sends no visitor data.'],
+];
+---
+<Base title="Privacy by construction" description="How Tidemark counts visitors without cookies or stored IP addresses: a daily-rotating salted hash, no raw IPs or user agents in the database, and your data on your server." crumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
+  <div class="wrap page-head">
+    <h1>Private because there is nothing to keep.</h1>
+    <p class="lede">Tidemark is designed so that individual visitors can’t be followed, profiled or reconstructed. This is how.</p>
+  </div>
+  <div class="wrap page-body">
+    <div class="card tscroll"><table class="t"><thead><tr><th>Topic</th><th>What Tidemark does</th></tr></thead><tbody>
+      {rows.map(([a, b]) => <tr><th>{a}</th><td>{b}</td></tr>)}
+    </tbody></table></div>
+    <div class="prose">
+      <h2>How a visit is counted</h2>
+      <p>When a page loads, a small script sends the page, referrer and screen width to your Tidemark install. The server hashes the site, IP address and user agent with a secret and the current UTC date, keeps the first 32 characters of that hash, and discards the inputs. Hits from the same hash within 30 minutes of inactivity extend one visit.</p>
+      <p>Because the date is part of the key, the same person gets a different id tomorrow. Tidemark can tell you how many people visited today. It cannot tell you that one of them also visited last Tuesday.</p>
+      <h2>What we won’t claim</h2>
+      <p>We don’t say Tidemark is “GDPR compliant”, and we make no legal promises on your behalf. Compliance depends on how you use it, where you operate and what else your site does. Tidemark removes the need for visitor-level data, which makes your obligations smaller and simpler. Ask a qualified adviser about the rest.</p>
+      <h2>This website</h2>
+      <p>This site sets no cookies, loads no third-party scripts, fonts or trackers, and keeps no analytics. The one thing we collect is an email address if you join the Tidemark Cloud waitlist, used only to tell you when it opens.</p>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import { site } from '../data/site';
+const cron = '* * * * * php /home/you/tidemark/artisan schedule:run >> /dev/null 2>&1';
+const snip = '<script defer data-domain="example.com" src="https://stats.example.com/js/script.js"></script>';
+const js = "plausible('Signup', { props: { plan: 'pro' } })";
+const ld = [{ '@context': 'https://schema.org', '@type': 'HowTo', name: 'Install Tidemark on PHP shared hosting', step: [
+  { '@type': 'HowToStep', name: 'Upload the release zip', text: 'Upload and unzip the release on your host. Point the domain’s document root at the public/ folder.' },
+  { '@type': 'HowToStep', name: 'Run the web installer', text: 'Visit /install to check the server, connect a database, run migrations and create the admin account.' },
+  { '@type': 'HowToStep', name: 'Add a cron job', text: 'Optionally add a cron job that runs php artisan schedule:run every minute.' },
+  { '@type': 'HowToStep', name: 'Add the tracking snippet', text: 'Paste the script tag into your site’s head. The dashboard opens after the first pageview.' } ] }];
+---
+<Base title="Install on shared hosting" description="Install Tidemark on ordinary PHP shared hosting without SSH, Node or Docker: upload a zip, open /install, add one script tag. Requirements and update steps." jsonLd={ld} crumbs={[{ name: 'Install', path: '/install/' }]}>
+  <div class="wrap page-head">
+    <h1>Install on shared hosting.</h1>
+    <p class="lede">No Node, no Docker, no SSH. If your host runs PHP {site.requirements.replace('PHP ', '')}, you can run Tidemark.</p>
+  </div>
+  <div class="wrap page-body"><div class="prose">
+    <h2>Requirements</h2>
+    <ul>
+      <li>{site.requirements}</li>
+      <li>PHP extensions: <code>mbstring</code>, <code>openssl</code>, <code>pdo</code> plus one of <code>pdo_sqlite</code>, <code>pdo_mysql</code> or <code>pdo_pgsql</code>, <code>fileinfo</code>, <code>ctype</code>, <code>tokenizer</code>, <code>xml</code></li>
+      <li>A domain or subdomain for the dashboard, for example <code>stats.example.com</code></li>
+    </ul>
+
+    <h2>1. Upload</h2>
+    <p><a href={site.downloadUrl}>Download the release zip</a> (dependencies are bundled), upload it to your host and unzip it. <strong>Point the domain’s document root at the <code>public/</code> folder.</strong> If your host won’t let you, upload to the web root as it is: the bundled root <code>.htaccess</code> forwards requests to <code>public/</code> and blocks internal files.</p>
+
+    <h2>2. Run the installer</h2>
+    <p>Visit <code>https://your-domain/install</code>. The page checks the server, connects your database (SQLite needs no setup), runs the migrations and creates your admin account.</p>
+
+    <h2>3. Add a cron job</h2>
+    <p>Optional. It is only needed for queued ingestion and data retention. In cPanel, open <em>Cron Jobs</em> and add:</p>
+    <CodeBlock code={cron} />
+
+    <h2>4. Add the snippet</h2>
+    <p>Add a site in the dashboard and paste its snippet into your site’s <code>&lt;head&gt;</code>. The dashboard waits for the first pageview and then opens by itself.</p>
+    <CodeBlock code={snip} />
+
+    <h3>Script variants</h3>
+    <p>Optional behaviour is picked by the file name. Combine as many as you like, for example <code>script.outbound-links.file-downloads.js</code>. <strong>Site settings → General</strong> picks the file name for you.</p>
+    <div class="card tscroll"><table class="t"><thead><tr><th>Variant</th><th>Adds</th></tr></thead><tbody>
+      <tr><th><code>outbound-links</code></th><td>Outbound link click events</td></tr>
+      <tr><th><code>file-downloads</code></th><td>File download events</td></tr>
+      <tr><th><code>form-submissions</code></th><td>Form submission events</td></tr>
+      <tr><th><code>tagged-events</code></th><td>Click events from <code>class="plausible-event-name=Signup"</code></td></tr>
+      <tr><th><code>hash</code></th><td>Pageviews on <code>#hash</code> route changes</td></tr>
+      <tr><th><code>manual</code></th><td>No automatic pageviews; call <code>plausible('pageview')</code> yourself</td></tr>
+      <tr><th><code>local</code></th><td>Also track <code>localhost</code></td></tr>
+    </tbody></table></div>
+    <p style="margin-top:1.2em">Custom events and properties:</p>
+    <CodeBlock code={js} />
+
+    <h2>Updating</h2>
+    <p>Sign in as an administrator and open <strong>Account settings → Updates</strong>. Tidemark checks GitHub for a newer release; <strong>Download and install</strong> fetches it, verifies its SHA-256 checksum, backs up the current code to <code>storage/app/updates/backups/</code>, replaces the application files (never <code>.env</code>, <code>storage/</code> or your database), then runs migrations on the next request. Nothing contacts GitHub until you open that page.</p>
+    <p>No internet access from your host? Choose a release zip on the same page instead. It is sent in small pieces, so low PHP upload limits don’t matter. In-app updates need PHP’s <code>zip</code> extension and a folder PHP can write to. Otherwise upload the release over FTP as usual: the first request afterwards runs the migrations.</p>
+
+    <h2>Moving to the cloud later</h2>
+    <p>Tidemark Cloud is <a href="/cloud/">coming soon</a>. It is being built to run the same code and data model, so moving between your server and ours should be a data move, not a rewrite. Migration tools aren’t built yet.</p>
+  </div></div>
+</Base>

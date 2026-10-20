@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+const groups = [
+  { icon: 'chart-column', t: 'Dashboard', items: ['Six headline metrics: visitors, visits, pageviews, views per visit, bounce rate, visit duration.', 'Comparison with the previous period or the same period last year.', 'Graph with hour, day, week or month intervals, keyboard control and a “view as table” twin.', 'Realtime view and a live “online now” count.'] },
+  { icon: 'layers', t: 'Reports', items: ['Sources: channels, sources and UTM campaigns.', 'Pages: top, entry and exit pages.', 'Locations: world map, countries, regions and cities.', 'Devices: browsers, operating systems and device types.', 'Every list has a details view with search and paging.'] },
+  { icon: 'funnel', t: 'Filters and periods', items: ['Click any row to filter, or use the filter menu: is, is not, contains, does not contain, wildcards such as /blog/*.', 'Today, realtime, 24 hours, 7, 28, 30 and 91 days, month, 6 and 12 months, year, all time, or a custom range.', 'Keyboard shortcuts for every period.'] },
+  { icon: 'target', t: 'Goals and events', items: ['Custom events with properties, and page goals.', 'Optional script variants add outbound links, file downloads, form submissions and tagged click events.', 'Filtering by a goal switches the dashboard to conversion mode.'] },
+  { icon: 'users', t: 'Sharing and people', items: ['Public dashboards, or private shared links with an optional password.', 'Owner, admin and viewer roles per site.', 'Two-factor sign-in.'] },
+  { icon: 'shield', t: 'Shields', items: ['Block rules by IP address, country or page.', 'A hostname allow-list so only your own domains are counted.', 'Data retention: delete raw data older than N days, on a schedule.'] },
+  { icon: 'key', t: 'API and export', items: ['Stats API v1 that follows Plausible’s query format, with bearer-token API keys.', 'Events API: POST /api/event, compatible with Plausible’s.', 'CSV export of everything on the dashboard for the selected period and filters.'] },
+  { icon: 'server', t: 'Built for shared hosting', items: ['PHP 8.3+ with common extensions. SQLite, MySQL, MariaDB or PostgreSQL.', 'Web installer, one-click in-app updates (or upload a zip), and a root .htaccess that protects internals.', 'Behind Cloudflare or a similar CDN, the real client IP and country are read from its headers.'] },
+];
+---
+<Base title="Features" description="Everything in Tidemark: a one-page dashboard, reports, filters, goals, sharing, a Plausible-style API and CSV export. Cookie-free and built for shared hosting." crumbs={[{ name: 'Features', path: '/features/' }]}>
+  <div class="wrap page-head">
+    <h1>Everything you check weekly.</h1>
+    <p class="lede">A small, complete set of tools for understanding your audience, without profiling anyone in it.</p>
+  </div>
+  <div class="wrap page-body">
+    <div class="grid2">
+      {groups.map((g) => (
+        <section class="card pad feat">
+          <div class="empty-ico"><Icon name={g.icon} /></div>
+          <h3>{g.t}</h3>
+          <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+        </section>
+      ))}
+    </div>
+    <div class="notice" style="margin-top:16px"><Icon name="info" /><span>Not built yet: funnels, session replay and imports from other analytics tools. We would rather say so than imply otherwise.</span></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v{site.version}</a><a class="btn lg" href="/install/">Install guide</a></div>
+  </div>
+</Base>

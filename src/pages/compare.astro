@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const cols = ['Tidemark', 'Plausible', 'Umami', 'Matomo', 'Fathom'];
+const rows = [
+  ['Hosted version', 'Coming soon', 'Yes', 'Yes', 'Yes', 'Yes'],
+  ['Self-host', 'Yes, MIT', 'Yes (Community Edition)', 'Yes, MIT', 'Yes, GPL', 'No'],
+  ['Self-hosting needs', 'PHP 8.3+ and a database. Works on shared hosting', 'Docker, Postgres and ClickHouse', 'Node.js and a database', 'PHP and MySQL/MariaDB. Works on shared hosting', '—'],
+  ['Cookie-free by default', 'Yes', 'Yes', 'Yes', 'Configurable', 'Yes'],
+  ['Plausible-style tracking script and API', 'Yes', 'Native', 'No', 'No', 'No'],
+  ['Product scope', 'Web analytics, one page', 'Web analytics, one page', 'Analytics, journeys, retention, replay', 'Full analytics suite', 'Web analytics'],
+  ['Hosted price', 'Not set yet', 'From $9/mo', 'Free tier, paid plans', 'Paid plans', 'From about $15/mo'],
+];
+---
+<Base title="Tidemark vs Plausible, Umami, Matomo and Fathom" description="How Tidemark compares with Plausible, Umami, Matomo and Fathom: where each runs, what self-hosting takes, and when a different tool is the better choice." crumbs={[{ name: 'Compare', path: '/compare/' }]}>
+  <div class="wrap page-head">
+    <h1>Tidemark and the alternatives.</h1>
+    <p class="lede">All of these are good tools. The real difference is where they run and how much you want to operate. Here is the honest version.</p>
+  </div>
+  <div class="wrap page-body">
+    <div class="card tscroll"><table class="t">
+      <thead><tr><th><span class="sr-only">Feature</span></th>{cols.map((c, i) => <th class={i === 0 ? 'us' : ''}>{c}</th>)}</tr></thead>
+      <tbody>{rows.map((r) => <tr><th>{r[0]}</th>{r.slice(1).map((c, i) => <td class={i === 0 ? 'us' : ''}>{c}</td>)}</tr>)}</tbody>
+    </table></div>
+    <p class="muted" style="font-size:13px;margin:12px 0 0">Based on public information from each project. Products and prices change, so check their pages before you decide, and tell us if something here is out of date.</p>
+    <div class="prose">
+      <h2>Choose Tidemark if</h2>
+      <ul>
+        <li>You already pay for PHP hosting and want analytics on it, without running Node, Docker or a database cluster.</li>
+        <li>You want one calm dashboard and a script that is about 2 KB gzipped.</li>
+        <li>You already use Plausible’s script or API and want to point it somewhere you control.</li>
+      </ul>
+      <h2>Choose something else if</h2>
+      <ul>
+        <li><strong>You want a managed service today.</strong> Plausible and Fathom are mature, hosted and well run. Tidemark Cloud isn’t open yet.</li>
+        <li><strong>You need funnels, retention, session replay or revenue reports.</strong> Umami and Matomo go much further than Tidemark does.</li>
+        <li><strong>You need to import years of history.</strong> Tidemark can’t import from other tools yet.</li>
+      </ul>
+      <p><a class="btn primary lg" href={site.downloadUrl}>Download v{site.version}</a></p>
+    </div>
+  </div>
+</Base>
