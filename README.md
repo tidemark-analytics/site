@@ -29,6 +29,16 @@ The feature, privacy, comparison and cloud pages describe the product. When Tide
 
 The site measures itself with a Tidemark install: the script tag is in `src/layouts/Base.astro`, and the public dashboard is linked as the live demo. If you fork the site, replace both, and update the privacy page and footer wording.
 
+## Auto-deploy from GitHub releases (cron)
+
+`scripts/deploy-sites.sh` installs the latest release of this site and of the docs on your host, so publishing a release is all it takes. It verifies each zip's SHA-256 checksum, backs up the files it replaces, never touches anything it didn't install, and stays silent when there's nothing new. Run it from cron, for example every 15 minutes:
+
+```
+*/15 * * * * /bin/bash /var/www/<id>/deploy-sites.sh
+```
+
+Copy it outside your web roots, edit `BASE_DIR` and `SITES` at the top, and try `deploy-sites.sh --dry-run` first. State, backups and `deploy.log` live in `$BASE_DIR/.deploy`.
+
 ## Waitlist
 
 `public/waitlist.php` appends emails to `../waitlist/emails.csv` (one level above the web root if writable, otherwise `_waitlist/` with a deny-all `.htaccess`; duplicates are ignored). It needs PHP only on the host. Download the CSV via FTP. Replace it with your mailing-list provider's form action if you prefer.
