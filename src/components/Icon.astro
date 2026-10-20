@@ -1,0 +1,7 @@
+---
+import sprite from '../data/icons.svg?raw';
+const { name, class: cls = '' } = Astro.props;
+const m = sprite.match(new RegExp(`<symbol id="${name}"[^>]*>([\\s\\S]*?)</symbol>`));
+if (!m) throw new Error(`Unknown icon: ${name}`);
+---
+<svg class={`ico ${cls}`} viewBox="0 0 24 24" aria-hidden="true" focusable="false" set:html={m[1]} />

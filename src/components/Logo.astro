@@ -1,0 +1,8 @@
+---
+// Inline logo that inherits the text colour, like in the app. Source: brand/logo/*-ink.svg
+import horizontal from '../../public/brand/tidemark-horizontal-ink.svg?raw';
+import mark from '../../public/brand/tidemark-mark-ink.svg?raw';
+const { variant = 'horizontal' } = Astro.props;
+const svg = (variant === 'mark' ? mark : horizontal).replace(/#0B1B22/gi, 'currentColor').replace(/ width="\d+" height="\d+"/, '').replace('<title>Tidemark</title>', '');
+---
+<Fragment set:html={svg} />
