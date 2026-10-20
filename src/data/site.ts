@@ -6,7 +6,7 @@ export const site = {
     'Privacy-first web analytics that runs on any PHP host — or on ours. No cookies, no stored IP addresses, one light dashboard.',
   repoUrl: 'https://github.com/tidemark-analytics/tidemark',
   downloadUrl: 'https://github.com/tidemark-analytics/tidemark/releases/latest',
-  demoUrl: '',            // e.g. 'https://demo.tidemarkanalytics.com' — hides the demo button while empty
+  demoUrl: 'https://analytics.foggymtndrifter.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
   installDocsUrl: 'https://docs.tidemarkanalytics.com/install/shared-hosting/',
   waitlistAction: '/waitlist.php', // PHP endpoint shipped in /public (see README)
