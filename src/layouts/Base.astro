@@ -57,6 +57,20 @@ if (crumbs.length) {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={og} />
     <script defer data-domain="tidemarkanalytics.com" src="https://analytics.foggymtndrifter.com/js/script.outbound-links.file-downloads.form-submissions.js"></script>
+    <script define:vars={{ endpoint: site.latestEndpoint }}>
+      // Keep the version shown on download buttons current between rebuilds. Asks this site's own /latest.php (which caches
+      // GitHub's answer), never GitHub itself, so visitors' browsers make no third-party request.
+      window.addEventListener('load', () => {
+        fetch(endpoint, { headers: { Accept: 'application/json' } })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((d) => {
+            if (!d || !/^\d+\.\d+\.\d+/.test(d.version || '')) return;
+            document.querySelectorAll('[data-ver]').forEach((el) => { el.textContent = d.version; });
+            if (typeof d.url === 'string' && d.url.startsWith('https://github.com/')) document.querySelectorAll('a[data-release]').forEach((a) => { a.href = d.url; });
+          })
+          .catch(() => {});
+      });
+    </script>
     {graph.map((g) => <script type="application/ld+json" set:html={JSON.stringify(g)} />)}
   </head>
   <body>

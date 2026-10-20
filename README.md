@@ -17,7 +17,11 @@ Upload the **contents** of `dist/` to the web root (FTP, cPanel File Manager, or
 
 ## Facts that change
 
-Everything that repeats across pages lives in `src/data/site.ts`: the repository and download URLs, `demoUrl` (the live demo dashboard; empty hides the demo button) and the `version` shown on download buttons. Update `version` when a new Tidemark release ships. Set `SITE_URL` at build time for canonical URLs, the sitemap and Open Graph tags (default `https://tidemarkanalytics.com`).
+Everything that repeats across pages lives in `src/data/site.ts`: the repository and download URLs, the docs URLs and `demoUrl` (the live demo dashboard; empty hides the demo button). Set `SITE_URL` at build time for canonical URLs, the sitemap and Open Graph tags (default `https://tidemarkanalytics.com`).
+
+### The version number is automatic
+
+You never edit it. At build time `site.ts` asks GitHub for the latest Tidemark release (falling back to `fallbackVersion` if GitHub can't be reached; bump that occasionally). Between rebuilds, the page script asks the site's own `public/latest.php`, which caches GitHub's answer for an hour, and updates the version on every `data-ver` element and the link on `data-release` anchors. Visitors' browsers never contact GitHub, which keeps the privacy page true. On a host without PHP the static, build-time version simply stays.
 
 The feature, privacy, comparison and cloud pages describe the product. When Tidemark's behavior changes, update the matching page, and re-check the [comparison table](src/pages/compare.astro) against each competitor's own site now and then.
 
