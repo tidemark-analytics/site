@@ -9,9 +9,10 @@ import { site } from '../../data/site';
 
 const faqs = [
   { q: 'What counts as an event?', a: 'Pageviews and custom events (such as a signup or a download click). Visits, sessions and the dashboard itself are not counted.' },
-  { q: 'What happens if I go over my events?', a: 'On Free, new events stop being recorded until the month resets, and everything already collected stays. On Pro, 250,000 events a month is an allowance: go over it and nothing changes except an email letting you know. To keep the service fair for everyone there is a ceiling of 2,000,000 events a month, at which recording pauses until the month resets. If you need more, get in touch and we’ll work something out.' },
+  { q: 'What happens if I go over my events?', a: 'On Free, new events stop being recorded until the month resets, and everything already collected stays. On Pro, recording never stops on its own: events beyond the 250,000 a month included (3,000,000 a year on the yearly plan) cost $5 per 250,000, charged in proportion and added to your next renewal. We email you when you pass what is included, and again if the extra reaches $50.' },
+  { q: 'Can I limit what I spend on extra events?', a: 'Yes. In Account settings → Plan & billing you can set a spending limit for extra events, from $0 upward, per billing period. When it is reached recording pauses until the next period and you are never charged beyond it. A limit of $0 means you never pay extra. With no limit set, recording simply continues and you pay for what you use.' },
   { q: 'Can I cancel any time?', a: 'Yes. Cancel from Account settings → Plan & billing. Pro stays active until the end of the period you paid for. Within 30 days of any payment you can also ask for a full refund, no questions asked.' },
-  { q: 'Who handles payments and tax?', a: 'Paddle, our merchant of record. They process the payment, issue the receipt, and collect and remit VAT or sales tax, which may be added to the price at checkout.' },
+  { q: 'Who handles payments and tax?', a: 'Creem, our merchant of record. They process the payment, issue the receipt, and collect and remit VAT or sales tax, which may be added to the price at checkout.' },
   { q: 'Is my visitors’ data private?', a: 'Yes. Tidemark sets no cookies and never stores IP addresses or raw user agents. Visitor ids are a salted hash that changes every day. See the privacy notice for the details.' },
   { q: 'Can I bring my existing data?', a: 'If you run Tidemark yourself, yes: export a site from its settings and import the file into your Cloud site. Imports are safe to repeat, goals come along, and history older than your plan keeps is skipped. Importing from other analytics tools is not supported yet.' },
   { q: 'Can I run it myself instead?', a: 'Yes. Tidemark is open source (MIT) and installs on ordinary PHP hosting. Cloud is the same dashboard without the server to look after.' },
@@ -31,7 +32,7 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'Product', name: 'Tidem
     <div class="wrap">
       <div class="section-head"><h2>Simple pricing</h2><p>One paid plan. Prices are in US dollars; any VAT or sales tax is added at checkout.</p></div>
       <PlanCards />
-      <p class="finep">Cancel any time. Full refund within 30 days of any payment, no questions asked: see the <a class="link" href="/refunds/">refund policy</a>. Payments are processed by Paddle, our merchant of record.</p>
+      <p class="finep">Cancel any time. Full refund within 30 days of any payment, no questions asked: see the <a class="link" href="/refunds/">refund policy</a>. Payments are processed by Creem, our merchant of record.</p>
     </div>
   </section>
 
