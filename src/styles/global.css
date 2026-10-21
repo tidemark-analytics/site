@@ -143,7 +143,7 @@ table.t tbody tr:hover > .us { background: var(--accent-soft); }
 
 /* ---- footer -------------------------------------------------------------------------------------------- */
 .foot { border-top: 1px solid var(--line); padding: 40px 0 32px; font-size: 13.5px; color: var(--ink-3); }
-.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 28px; }
+.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 28px; }
 .foot h2 { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 550; margin-bottom: 8px; }
 .foot nav { display: flex; flex-direction: column; gap: 6px; } .foot nav a { color: var(--ink-2); width: fit-content; } .foot nav a:hover { color: var(--accent-ink); }
 .foot .about { max-width: 34ch; margin-top: 12px; line-height: 1.5; }

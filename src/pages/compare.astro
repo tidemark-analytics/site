@@ -3,13 +3,13 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 const cols = ['Tidemark', 'Plausible', 'Umami', 'Matomo', 'Fathom'];
 const rows = [
-  ['Hosted version', 'Coming soon', 'Yes', 'Yes', 'Yes', 'Yes'],
+  ['Hosted version', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'],
   ['Self-host', 'Yes, MIT', 'Yes (Community Edition)', 'Yes, MIT', 'Yes, GPL', 'No'],
   ['Self-hosting needs', 'PHP 8.3+ and a database. Works on shared hosting', 'Docker, Postgres and ClickHouse', 'Node.js and a database', 'PHP and MySQL/MariaDB. Works on shared hosting', '—'],
   ['Cookie-free by default', 'Yes', 'Yes', 'Yes', 'Configurable', 'Yes'],
   ['Plausible-style tracking script and API', 'Yes', 'Native', 'No', 'No', 'No'],
   ['Product scope', 'Web analytics, one page', 'Web analytics, one page', 'Analytics, journeys, retention, replay', 'Full analytics suite', 'Web analytics'],
-  ['Hosted price', 'Not set yet', 'From $9/mo', 'Free tier, paid plans', 'Paid plans', 'From about $15/mo'],
+  ['Hosted price', 'Free tier, then $7/mo', 'From $9/mo', 'Free tier, paid plans', 'Paid plans', 'From about $15/mo'],
 ];
 ---
 <Base title="Tidemark vs Plausible, Umami, Matomo and Fathom" description="How Tidemark compares with Plausible, Umami, Matomo and Fathom: where each runs, what self-hosting takes, and when a different tool is the better choice." crumbs={[{ name: 'Compare', path: '/compare/' }]}>
@@ -32,7 +32,7 @@ const rows = [
       </ul>
       <h2>Choose something else if</h2>
       <ul>
-        <li><strong>You want a managed service today.</strong> Plausible and Fathom are mature, hosted and well run. Tidemark Cloud isn’t open yet.</li>
+        <li><strong>You want a managed service today.</strong> Plausible and Fathom are mature, hosted and well run, and have been for years. Tidemark Cloud is newer.</li>
         <li><strong>You need funnels, retention, session replay or revenue reports.</strong> Umami and Matomo go much further than Tidemark does.</li>
         <li><strong>You need to import years of history.</strong> Tidemark can’t import from other tools yet.</li>
       </ul>

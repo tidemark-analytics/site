@@ -28,7 +28,11 @@ export const site = {
   demoUrl: 'https://analytics.foggymtndrifter.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
   installDocsUrl: 'https://docs.tidemarkanalytics.com/install/shared-hosting/',
-  waitlistAction: '/waitlist.php', // PHP endpoint shipped in /public (see README)
+  appUrl: 'https://app.tidemarkanalytics.com',
+  signupUrl: 'https://app.tidemarkanalytics.com/register',
+  operator: 'Michael Kinder',
+  supportEmail: 'support@tidemarkanalytics.com',
+  legalUpdated: 'October 21, 2026',
   version, // refreshed from GitHub at build time, and in the browser via /latest.php
   latestEndpoint: '/latest.php', // PHP endpoint shipped in /public that proxies the GitHub API (cached)
   requirements: 'PHP 8.3+',
@@ -39,5 +43,5 @@ export const nav = [
   { href: site.docsUrl, label: 'Docs' },
   { href: '/privacy/', label: 'Privacy' },
   { href: '/compare/', label: 'Compare' },
-  { href: '/cloud/', label: 'Cloud', badge: 'Soon' },
+  { href: '/cloud/', label: 'Cloud & pricing' },
 ];

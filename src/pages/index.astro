@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Dashboard from '../components/Dashboard.astro';
 import CodeBlock from '../components/CodeBlock.astro';
-import Waitlist from '../components/Waitlist.astro';
 import Logo from '../components/Logo.astro';
 import { site } from '../data/site';
 
@@ -15,7 +14,7 @@ const faqs = [
   { q: 'Do I need a cookie banner?', a: 'Tidemark sets no cookies and stores no IP addresses or other personal data about visitors. Whether you need a consent banner depends on your jurisdiction and the rest of your site, so check with someone qualified. We do not make legal promises on your behalf.' },
   { q: 'How does it count visitors without cookies?', a: 'A visitor is a salted hash of site, IP address and user agent. The salt changes every day, and the IP address and user agent are never written to the database. Nobody can be followed from one day to the next.' },
   { q: 'Can I switch from Plausible?', a: 'The tracking script and the Events API follow Plausible’s conventions: data-domain, window.plausible(…) and script variants such as script.outbound-links.js. In most setups you change the script URL and nothing else. Historical data is not imported yet.' },
-  { q: 'What does it cost?', a: 'The self-hosted version is free and open source under the MIT license. Tidemark Cloud, a hosted version, is planned. Pricing is not set yet, and we will say so plainly until it is.' },
+  { q: 'What does it cost?', a: 'The self-hosted version is free and open source under the MIT license. Tidemark Cloud, the hosted version, has a free plan (1 site, 10,000 events a month) and Pro at $7 a month or $70 a year (250,000 events, unlimited sites, 5 years of history).' },
   { q: 'How do updates work?', a: 'Sign in as an administrator and open Account settings → Updates. Tidemark checks GitHub for a newer release, and one click downloads it, verifies its checksum, backs up the current code, replaces the application files (never your .env, storage or database) and runs migrations. You can also upload a release zip yourself, or replace the files over FTP. Tidemark looks for new releases every few hours and shows a dot by your profile when one is out; it asks GitHub only for the latest version number, and one setting turns that off.' },
 ];
 const ld = [
@@ -105,11 +104,11 @@ const ld = [
     <div class="wrap">
       <div class="card pad cloud">
         <div>
-          <span class="pill warn kicker">Coming soon</span>
+          <span class="pill brand kicker">Hosted by us</span>
           <h2>Tidemark Cloud</h2>
-          <p class="body big">Prefer not to run a server? We’re building a hosted version that runs the same code, so you can start on shared hosting and move later, or start hosted. Migration tools aren’t built yet, and we’ll say when they are. Join the list and we’ll email you once, when it opens.</p>
+          <p class="body big">Prefer not to run a server? Tidemark Cloud is the same dashboard, hosted for you. Start on the free plan (1 site, 10,000 events a month), or go Pro for <b>$7 a month</b>: 250,000 events, unlimited sites and five years of history.</p>
         </div>
-        <div class="wlbox"><Waitlist id="home-waitlist" /></div>
+        <div class="wlbox"><div class="stack"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/cloud/">Pricing &amp; details <Icon name="arrow-right" /></a></div></div>
       </div>
     </div>
   </section>

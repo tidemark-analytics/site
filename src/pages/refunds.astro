@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Refund Policy" description="Tidemark Cloud refund policy: a full refund within 30 days of any payment, no questions asked." crumbs={[{ name: 'Refunds', path: '/refunds/' }]}>
+  <div class="wrap page-head">
+    <h1>Refund Policy</h1>
+    <p class="lede">If Tidemark Cloud Pro isn’t right for you, you get your money back. Last updated {site.legalUpdated}.</p>
+  </div>
+  <div class="wrap page-body"><div class="prose">
+    <h2>30 days, no questions asked</h2>
+    <p>Within <strong>30 days of any payment</strong> for the Pro plan, monthly or yearly, you can ask for a full refund and we will give it, without needing a reason. That covers your first payment and renewals.</p>
+
+    <h2>How to ask</h2>
+    <ul>
+      <li>Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> from the address on your account, or contact Paddle, our payment provider and merchant of record, through the link in your receipt.</li>
+      <li>We’ll process the refund within 2 business days. Your bank or card issuer may take 5–10 business days to show it.</li>
+      <li>The refund goes back to the original payment method, in the currency you paid, including any tax that was charged.</li>
+    </ul>
+
+    <h2>What happens afterwards</h2>
+    <p>A refund cancels the subscription and your account moves to the Free plan. Your data is kept (Free keeps 6 months of history) and you can resubscribe at any time.</p>
+
+    <h2>Canceling without a refund</h2>
+    <p>You can cancel at any time under <em>Account settings → Plan &amp; billing</em>. Pro then stays active until the end of the period you’ve paid for, and you are not charged again. Payments older than 30 days aren’t refunded, except where the law requires it or where we ended the service.</p>
+
+    <h2>The Free plan</h2>
+    <p>The Free plan costs nothing, so there is nothing to refund.</p>
+
+    <h2>Your legal rights</h2>
+    <p>This policy doesn’t affect any rights you have by law. For example, consumers in the EU and UK may have a statutory right to withdraw from a distance contract within 14 days, and our 30-day policy is more generous than that.</p>
+
+    <p>Questions? <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>. See also the <a href="/terms/">Terms of Service</a>.</p>
+  </div></div>
+</Base>

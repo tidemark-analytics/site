@@ -1,29 +1,84 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Waitlist from '../../components/Waitlist.astro';
 import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+
+const faqs = [
+  { q: 'What counts as an event?', a: 'Pageviews and custom events (such as a signup or a download click). Visits, sessions and the dashboard itself are not counted.' },
+  { q: 'What happens if I go over my events?', a: 'On Free, new events stop being recorded until the month resets, and everything already collected stays. On Pro, 250,000 events a month is an allowance rather than a hard cap: nothing is cut off, and we’ll email you if you go well beyond it.' },
+  { q: 'Can I cancel any time?', a: 'Yes. Cancel from Account settings → Plan & billing. Pro stays active until the end of the period you paid for. Within 30 days of any payment you can also ask for a full refund, no questions asked.' },
+  { q: 'Who handles payments and tax?', a: 'Paddle, our merchant of record. They process the payment, issue the receipt, and collect and remit VAT or sales tax, which may be added to the price at checkout.' },
+  { q: 'Is my visitors’ data private?', a: 'Yes. Tidemark sets no cookies and never stores IP addresses or raw user agents. Visitor ids are a salted hash that changes every day. See the privacy notice for the details.' },
+  { q: 'Can I run it myself instead?', a: 'Yes. Tidemark is open source (MIT) and installs on ordinary PHP hosting. Cloud is the same dashboard without the server to look after.' },
+];
+const ld = [{ '@context': 'https://schema.org', '@type': 'Product', name: 'Tidemark Cloud', description: 'Hosted privacy-first web analytics.', brand: { '@type': 'Brand', name: 'Tidemark' },
+  offers: [{ '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Pro (monthly)', price: '7', priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Pro (yearly)', price: '70', priceCurrency: 'USD' }] },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
 ---
-<Base title="Tidemark Cloud — coming soon" description="Tidemark Cloud is the hosted version of Tidemark: the same privacy-first analytics without running a server. Join the waitlist." crumbs={[{ name: 'Cloud', path: '/cloud/' }]}>
+<Base title="Tidemark Cloud and pricing" description="Hosted, privacy-first web analytics. Start free, or go Pro for $7 a month: 250,000 events, unlimited sites and 5 years of history. No cookies, no stored IP addresses." jsonLd={ld} crumbs={[{ name: 'Cloud & pricing', path: '/cloud/' }]}>
   <section class="wash cloud-hero">
     <div class="wrap">
-      <span class="pill warn kicker">Coming soon</span>
+      <span class="pill brand kicker">Hosted by us</span>
       <h1>Tidemark Cloud</h1>
-      <p class="lede">A hosted Tidemark for people who would rather not run a server. Built on the same code and the same dashboard. Join the list and we’ll email you once, when it opens.</p>
-      <div class="box"><Waitlist id="cloud-waitlist" /></div>
+      <p class="lede">The same calm one-page dashboard, without a server to run. Privacy-first analytics with no cookies and no stored IP addresses, for a few dollars a month. Start free; upgrade only when you need to.</p>
+      <div class="cta"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href={site.appUrl}>Sign in</a></div>
     </div>
   </section>
-  <section class="section page-body">
+
+  <section class="section page-body" id="pricing">
+    <div class="wrap">
+      <div class="section-head"><h2>Simple pricing</h2><p>One paid plan. Prices are in US dollars; any VAT or sales tax is added at checkout.</p></div>
+      <div class="plans">
+        <article class="card pad plan">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul><li>1 site</li><li>10,000 events a month</li><li>6 months of history</li><li>All reports, filters, goals and shared links</li></ul>
+          <a class="btn lg" href={site.signupUrl}>Start free</a>
+        </article>
+        <article class="card pad plan hl">
+          <span class="pill brand">Pro</span>
+          <div class="price">$7 <small>/ month</small></div>
+          <p class="muted small">or $70 a year, which is two months free</p>
+          <ul><li>Unlimited sites</li><li>250,000 events a month</li><li>5 years of history</li><li>Everything in Free</li></ul>
+          <a class="btn primary lg" href={site.signupUrl}>Get Pro</a>
+        </article>
+      </div>
+      <p class="muted small" style="margin-top:14px">Cancel any time. Full refund within 30 days of any payment, no questions asked: see the <a class="link" href="/refunds/">refund policy</a>. Payments are processed by Paddle, our merchant of record.</p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
       <div class="grid3">
-        <div class="card pad feat"><div class="empty-ico"><Icon name="refresh-cw" /></div><h3>One product, two places to live</h3><p>The goal is that you can start on shared hosting and move to Cloud later, or the reverse. Migration tools aren’t built yet.</p></div>
-        <div class="card pad feat"><div class="empty-ico"><Icon name="globe" /></div><h3>Regional cells</h3><p>The design is built around regional cells, so data residency (for example in the EU) can be a choice, not an afterthought.</p></div>
-        <div class="card pad feat"><div class="empty-ico"><Icon name="info" /></div><h3>What isn’t decided</h3><p>Pricing, plans and the launch date. We’ll publish them here when they’re real, not before.</p></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="shield-check" /></div><h3>Private by design</h3><p>No cookies, no stored IP addresses, and visitor ids that change every day. You can’t be asked to hand over what we don’t keep.</p></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="chart-column" /></div><h3>Everything on one page</h3><p>Visitors, pageviews, bounce rate and duration, with sources, pages, locations, devices and goals underneath.</p></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="server" /></div><h3>Open source underneath</h3><p>The software is MIT licensed. Run it yourself any time, or let us run it for you.</p></div>
       </div>
-      <p class="muted" style="margin-top:20px">Self-hosting stays free and open source either way.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Questions</h2></div>
+      <div class="card faq">
+        {faqs.map((f) => (<details><summary>{f.q}<Icon name="chevron-down" /></summary><p>{f.a}</p></details>))}
+      </div>
+      <p class="muted small" style="margin-top:14px">By signing up you agree to the <a class="link" href="/terms/">Terms of Service</a> and acknowledge the <a class="link" href="/privacy/#cloud">privacy notice</a>. Questions? <a class="link" href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
     </div>
   </section>
 </Base>
 <style>
   .cloud-hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); } .cloud-hero h1 { margin-bottom: 16px; }
-  .lede { max-width: 58ch; font-size: 18px; line-height: 1.55; color: var(--ink-2); } .box { margin-top: 28px; }
+  .lede { max-width: 58ch; font-size: 18px; line-height: 1.55; color: var(--ink-2); }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .small { font-size: 13.5px; }
+  .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 760px; } @media (max-width: 640px) { .plans { grid-template-columns: 1fr; } }
+  .plan { display: flex; flex-direction: column; gap: 12px; } .plan.hl { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .plan h3 { font-size: 18px; } .price { font-size: 40px; font-weight: 600; letter-spacing: -.035em; line-height: 1.1; } .price small { font-size: 15px; font-weight: 450; color: var(--ink-3); letter-spacing: 0; }
+  .plan ul { margin: 0; padding-left: 1.1em; color: var(--ink-2); display: grid; gap: 6px; flex: 1; } .plan .btn { justify-content: center; }
+  .faq details { border-bottom: 1px solid var(--line); } .faq details:last-child { border-bottom: 0; }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 20px; font-weight: 580; font-size: 15px; }
+  .faq summary::-webkit-details-marker { display: none; } .faq summary:hover { background: var(--surface-2); } .faq summary :global(.ico) { color: var(--ink-3); transition: transform .2s var(--ease); }
+  .faq details[open] summary :global(.ico) { transform: rotate(180deg); }
+  .faq p { padding: 0 20px 18px; color: var(--ink-2); max-width: 68ch; font-size: 14.5px; }
 </style>

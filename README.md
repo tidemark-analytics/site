@@ -39,9 +39,9 @@ The site measures itself with a Tidemark install: the script tag is in `src/layo
 
 Copy it outside your web roots, edit `BASE_DIR` and `SITES` at the top, and try `deploy-sites.sh --dry-run` first. State, backups and `deploy.log` live in `$BASE_DIR/.deploy`.
 
-## Waitlist
+## Cloud, pricing and legal pages
 
-`public/waitlist.php` appends emails to `../waitlist/emails.csv` (one level above the web root if writable, otherwise `_waitlist/` with a deny-all `.htaccess`; duplicates are ignored). It needs PHP only on the host. Download the CSV via FTP. Replace it with your mailing-list provider's form action if you prefer.
+`src/pages/cloud/` is the Tidemark Cloud product and pricing page, and `terms`, `refunds` and the Cloud section of `privacy` are the legal pages the payment provider requires. Operator name, support email and the sign-up URL live in `src/data/site.ts`. If the prices or plan limits change, update the Cloud page, the home page, the comparison table and the Terms together. These pages are a plain-language draft, not legal advice.
 
 ## Brand
 
