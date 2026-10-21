@@ -26,17 +26,18 @@ const rows = [
     <div class="prose">
       <h2>Choose Tidemark if</h2>
       <ul>
+        <li>You want hosted analytics with a real free plan and one flat paid plan at $7 a month, and the freedom to leave with your data.</li>
         <li>You already pay for PHP hosting and want analytics on it, without running Node, Docker or a database cluster.</li>
         <li>You want one calm dashboard and a script that is about 2 KB gzipped.</li>
         <li>You already use Plausible’s script or API and want to point it somewhere you control.</li>
       </ul>
       <h2>Choose something else if</h2>
       <ul>
-        <li><strong>You want a managed service today.</strong> Plausible and Fathom are mature, hosted and well run, and have been for years. Tidemark Cloud is newer.</li>
+        <li><strong>You want the most established managed service.</strong> Plausible and Fathom are mature, hosted and well run, and have been for years. Tidemark Cloud is newer.</li>
         <li><strong>You need funnels, retention, session replay or revenue reports.</strong> Umami and Matomo go much further than Tidemark does.</li>
         <li><strong>You need to import years of history.</strong> Tidemark can’t import from other tools yet.</li>
       </ul>
-      <p><a class="btn primary lg" href={site.downloadUrl}>Download v<span data-ver>{site.version}</span></a></p>
+      <div class="cta"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/self-host/">Self-host instead</a></div>
     </div>
   </div>
 </Base>

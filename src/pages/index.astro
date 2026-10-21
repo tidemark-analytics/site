@@ -4,67 +4,80 @@ import Icon from '../components/Icon.astro';
 import Dashboard from '../components/Dashboard.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import Logo from '../components/Logo.astro';
+import PlanCards from '../components/PlanCards.astro';
+import Faq from '../components/Faq.astro';
 import { site } from '../data/site';
 
-const snippet = '<script defer data-domain="example.com"\n  src="https://stats.example.com/js/script.js"></script>';
-const snippetHtml = `<span class="k">&lt;script</span> defer data-domain=<span class="s">"example.com"</span>\n  src=<span class="s">"https://stats.example.com/js/script.js"</span><span class="k">&gt;&lt;/script&gt;</span>`;
+const snippet = '<script defer data-domain="yourdomain.com"\n  src="https://app.tidemarkanalytics.com/js/script.js"></script>';
+const snippetHtml = `<span class="k">&lt;script</span> defer data-domain=<span class="s">"yourdomain.com"</span>\n  src=<span class="s">"https://app.tidemarkanalytics.com/js/script.js"</span><span class="k">&gt;&lt;/script&gt;</span>`;
 
 const faqs = [
-  { q: 'Does Tidemark really run on shared hosting?', a: 'Yes. It is a PHP application with a bundled set of dependencies. You upload a zip, open /install and follow the steps. It needs PHP 8.3 or newer and a handful of common extensions, and it works with SQLite, MySQL, MariaDB or PostgreSQL. No Node, Docker or SSH is required.' },
+  { q: 'Is the free plan really free?', a: 'Yes. Cloud Free gives you one site, 10,000 events a month and six months of history, with every report, filter, goal and shared link. No credit card is asked for. If you go over 10,000 events, new events pause until the month resets and nothing already collected is lost.' },
+  { q: 'What counts as an event?', a: 'A pageview or a custom event, such as a signup or a download click. Most small sites use a few thousand a month.' },
   { q: 'Do I need a cookie banner?', a: 'Tidemark sets no cookies and stores no IP addresses or other personal data about visitors. Whether you need a consent banner depends on your jurisdiction and the rest of your site, so check with someone qualified. We do not make legal promises on your behalf.' },
   { q: 'How does it count visitors without cookies?', a: 'A visitor is a salted hash of site, IP address and user agent. The salt changes every day, and the IP address and user agent are never written to the database. Nobody can be followed from one day to the next.' },
-  { q: 'Can I switch from Plausible?', a: 'The tracking script and the Events API follow Plausible’s conventions: data-domain, window.plausible(…) and script variants such as script.outbound-links.js. In most setups you change the script URL and nothing else. Historical data is not imported yet.' },
-  { q: 'What does it cost?', a: 'The self-hosted version is free and open source under the MIT license. Tidemark Cloud, the hosted version, has a free plan (1 site, 10,000 events a month) and Pro at $7 a month or $70 a year (250,000 events, unlimited sites, 5 years of history).' },
-  { q: 'How do updates work?', a: 'Sign in as an administrator and open Account settings → Updates. Tidemark checks GitHub for a newer release, and one click downloads it, verifies its checksum, backs up the current code, replaces the application files (never your .env, storage or database) and runs migrations. You can also upload a release zip yourself, or replace the files over FTP. Tidemark looks for new releases every few hours and shows a dot by your profile when one is out; it asks GitHub only for the latest version number, and one setting turns that off.' },
+  { q: 'Can I switch from Plausible or move between Cloud and self-hosted?', a: 'The tracking script and Events API follow Plausible’s conventions, so in most setups you change the script URL and nothing else. Tidemark can also export a site’s data and import it into another install, which makes moving between Cloud and self-hosted a download and an upload. Importing from Plausible itself is not supported yet.' },
+  { q: 'Can I cancel or get a refund?', a: 'Cancel any time from your account. Pro stays active until the end of the period you paid for, and within 30 days of any payment you can ask for a full refund, no questions asked.' },
+  { q: 'Does Tidemark really run on shared hosting?', a: 'Yes. It is a PHP application with a bundled set of dependencies. You upload a zip, open /install and follow the steps. It needs PHP 8.3 or newer and a handful of common extensions, and it works with SQLite, MySQL, MariaDB or PostgreSQL. No Node, Docker or SSH is required.' },
 ];
+
 const ld = [
-  { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Tidemark', applicationCategory: 'BusinessApplication', applicationSubCategory: 'Web analytics', operatingSystem: 'Any server running PHP 8.3+', description: site.description, softwareVersion: site.version, license: 'https://opensource.org/license/mit', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Tidemark', applicationCategory: 'BusinessApplication', applicationSubCategory: 'Web analytics', operatingSystem: 'Web, or any server running PHP 8.3+', description: site.description, softwareVersion: site.version, license: 'https://opensource.org/license/mit',
+    offers: [{ '@type': 'Offer', name: 'Cloud Free', price: '0', priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Cloud Pro (monthly)', price: '7', priceCurrency: 'USD' }, { '@type': 'Offer', name: 'Self-hosted', price: '0', priceCurrency: 'USD' }] },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
   { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Tidemark', url: Astro.site?.href },
 ];
 ---
-<Base title="Tidemark — Privacy-first web analytics for any PHP host" description="Cookie-free, privacy-first web analytics you can upload to ordinary shared hosting in minutes. One light dashboard, Plausible-compatible tracking, no Node or Docker." jsonLd={ld}>
+<Base title="Tidemark — Privacy-first web analytics, free to start" description="Cookie-free, privacy-first web analytics on one calm page. Start free on Tidemark Cloud, or self-host on any PHP host. No cookies, no stored IP addresses." jsonLd={ld}>
   <section class="wash hero">
     <div class="wrap">
-      <span class="pill brand kicker">Open source · MIT license</span>
+      <span class="pill brand kicker">Privacy-first web analytics</span>
       <h1>Measure the <span class="tide">tide</span>,<br />not the footprints.</h1>
-      <p class="lede">Tidemark is privacy-first web analytics that installs on ordinary PHP hosting. Upload a zip, open <code>/install</code>, and read your traffic on one calm page. No cookies, no stored IP addresses.</p>
+      <p class="lede">Tidemark shows you where your visitors come from and what they read, on one calm page. No cookies, no stored IP addresses, nothing to put in a consent banner. <b>Start free in a minute</b>, or run it yourself on any PHP host.</p>
       <div class="cta">
-        <a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v<span data-ver>{site.version}</span></a>
-        {site.demoUrl ? <a class="btn lg" href={site.demoUrl}>View live demo</a> : <a class="btn lg" href={site.installDocsUrl}>See how it installs <Icon name="arrow-right" /></a>}
+        <a class="btn primary lg" href={site.signupUrl}>Start free</a>
+        {site.demoUrl ? <a class="btn lg" href={site.demoUrl}>View live demo</a> : null}
+        <a class="textlink" href="/self-host/">Or self-host it <Icon name="arrow-right" /></a>
       </div>
-      <p class="meta">Latest: <a href={site.releaseUrl} data-release>v<span data-ver>{site.version}</span></a> · {site.requirements} · SQLite, MySQL, MariaDB or PostgreSQL · no Node, Docker or SSH</p>
+      <p class="meta">Free plan, no credit card · Pro is $7 a month · Open source (MIT)</p>
       <div class="shot"><Dashboard /></div>
     </div>
   </section>
 
+  <div class="strip"><div class="wrap trust">
+    <span><Icon name="shield-check" />No cookies</span>
+    <span><Icon name="lock" />No stored IP addresses</span>
+    <span><Icon name="code" />Open source, MIT</span>
+    <span><Icon name="cloud" />Hosted, or on your own PHP host</span>
+    <span><Icon name="refresh-cw" />Plausible-compatible script</span>
+  </div></div>
+
   <section class="section">
     <div class="wrap">
-      <div class="section-head"><h2>Keep the line, not the footprints.</h2><p>A tidemark is the line a tide leaves on a harbor wall: a record of how high the water reached, kept without keeping the water. Tidemark does that for your website.</p></div>
+      <div class="section-head"><h2>Everything you check, none of the surveillance.</h2><p>A tidemark is the line a tide leaves on a harbor wall: a record of how high the water reached, kept without keeping the water. Tidemark does that for your website.</p></div>
       <div class="grid3">
-        <article class="card pad"><div class="empty-ico"><Icon name="chart-column" /></div><h3>Clear</h3><p class="body">Visitors, visits, pageviews, bounce rate and visit duration on one page, with sources, pages, locations, devices and goals underneath. You reach the bottom of your data in one screen.</p></article>
-        <article class="card pad"><div class="empty-ico"><Icon name="shield-check" /></div><h3>Private</h3><p class="body">No cookies and no stored IP addresses. Visitor ids are a salted hash that changes every day, so nobody can be followed from one day to the next. Nothing to disclose, because nothing is kept.</p></article>
-        <article class="card pad"><div class="empty-ico"><Icon name="server" /></div><h3>Portable</h3><p class="body">Run it on a $3 shared host today, with your data in a database you control. A hosted version is on the way for people who would rather not run anything.</p></article>
+        <article class="card pad"><div class="empty-ico"><Icon name="chart-column" /></div><h3>One calm page</h3><p class="body">Visitors, visits, pageviews, bounce rate and visit duration, with sources, pages, locations, devices and goals underneath. You reach the bottom of your data in one screen.</p></article>
+        <article class="card pad"><div class="empty-ico"><Icon name="shield-check" /></div><h3>Private by design</h3><p class="body">No cookies and no stored IP addresses. Visitor ids are a salted hash that changes every day, so nobody can be followed from one day to the next. Nothing to disclose, because nothing is kept.</p></article>
+        <article class="card pad"><div class="empty-ico"><Icon name="refresh-cw" /></div><h3>No lock-in</h3><p class="body">The software is open source. Export a site and import it into any other Tidemark install, so you can start on Cloud and move to your own server later, or the other way around.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="section" id="install">
+  <section class="section" id="how">
     <div class="wrap split">
       <div>
-        <h2>Four steps. No terminal.</h2>
+        <h2>Live in about two minutes.</h2>
         <ol class="steps">
-          <li><b>Upload</b> the release zip to your host and unzip it. Point the domain at the <code>public/</code> folder, or leave it: a bundled <code>.htaccess</code> forwards requests and blocks internals.</li>
-          <li><b>Open <code>/install</code></b>. Tidemark checks your server, connects a database, runs the migrations and creates your admin account.</li>
-          <li><b>Add the snippet</b> to your site’s <code>&lt;head&gt;</code>. The dashboard waits for the first pageview, then opens by itself.</li>
-          <li><b>Add a cron job</b> in cPanel, only if you want queued ingestion and data retention.</li>
+          <li><b>Create a free account.</b> No credit card, and no server to set up.</li>
+          <li><b>Add your site</b> and paste one line into its <code>&lt;head&gt;</code>. The script is about 2 KB and works with single-page apps out of the box.</li>
+          <li><b>Open the dashboard.</b> It opens by itself after the first pageview.</li>
         </ol>
-        <a class="btn" href={site.installDocsUrl}>Full install guide <Icon name="arrow-right" /></a>
+        <div class="cta" style="margin-top:0"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="textlink" href={site.docsUrl}>Read the docs <Icon name="arrow-right" /></a></div>
       </div>
       <div class="stack">
         <p class="muted small">Paste this into your site</p>
         <CodeBlock code={snippet} html={snippetHtml} />
-        <div class="notice"><Icon name="info" /><span>The script is about 2 KB gzipped, loads deferred, and sends a pageview on load and on every history change, so single-page apps work without extra code.</span></div>
+        <div class="notice"><Icon name="info" /><span>Already use Plausible? The script and Events API follow its conventions, so most sites only change the script address.</span></div>
       </div>
     </div>
   </section>
@@ -79,7 +92,7 @@ const ld = [
           ['target', 'Goals and events', 'Custom events, properties, outbound links, file downloads and form submissions, picked by script file name.'],
           ['globe', 'Locations and devices', 'Countries, regions, cities, browsers, operating systems and device types, without profiling anyone.'],
           ['link', 'Sharing', 'Make a dashboard public, or create private links with an optional password.'],
-          ['key', 'Stats API and CSV', 'A Plausible-style Stats API with API keys, CSV export, roles per site and two-factor sign-in.'],
+          ['key', 'API and export', 'A Plausible-style Stats API with API keys, CSV and full-data export, roles per site and two-factor sign-in.'],
         ].map(([i, t, d]) => (
           <article class="card pad"><div class="empty-ico"><Icon name={i} /></div><h3>{t}</h3><p class="body">{d}</p></article>
         ))}
@@ -88,27 +101,23 @@ const ld = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="pricing">
     <div class="wrap">
-      <div class="section-head"><h2>The one that installs on the hosting you already have.</h2><p>Most privacy-friendly analytics tools lead with a hosted service, or ask you to run a container stack. Tidemark’s opening is the host you already pay for.</p></div>
-      <div class="grid3">
-        <div class="card pad"><h3>Hosted-first tools</h3><p class="body">Plausible and Fathom are polished hosted services with a monthly bill that grows with traffic.</p></div>
-        <div class="card pad"><h3>Self-hosted stacks</h3><p class="body">Umami needs Node.js. Plausible’s self-hosted edition needs Docker, Postgres and ClickHouse.</p></div>
-        <div class="card pad hl"><h3>Tidemark</h3><p class="body">Upload a zip to any PHP host. Add a hosted plan later, if you want one, from the same code.</p></div>
-      </div>
-      <p class="more"><a class="link" href="/compare/">Compare in detail</a></p>
+      <div class="section-head"><h2>Start free. Pay only when you outgrow it.</h2><p>One paid plan, no per-seat pricing and no surprise tiers. Prices are in US dollars.</p></div>
+      <PlanCards />
+      <p class="finep">Cancel any time. Full refund within 30 days of any payment, no questions asked: see the <a class="link" href="/refunds/">refund policy</a>. Payments are handled by Paddle, our merchant of record, who also collect any VAT or sales tax. <a class="link" href="/cloud/">Pricing details and FAQ</a></p>
     </div>
   </section>
 
-  <section class="section" id="cloud">
+  <section class="section">
     <div class="wrap">
-      <div class="card pad cloud">
+      <div class="card pad dogfood">
         <div>
-          <span class="pill brand kicker">Hosted by us</span>
-          <h2>Tidemark Cloud</h2>
-          <p class="body big">Prefer not to run a server? Tidemark Cloud is the same dashboard, hosted for you. Start on the free plan (1 site, 10,000 events a month), or go Pro for <b>$7 a month</b>: 250,000 events, unlimited sites and five years of history.</p>
+          <span class="pill brand kicker"><Icon name="eye" />Nothing to hide</span>
+          <h2>This website runs on Tidemark Cloud.</h2>
+          <p class="body big">Its dashboard is public, so you can see real numbers on the real product instead of a screenshot. <a class="link" href="/compare/">Compare Tidemark with Plausible, Umami, Matomo and Fathom</a>.</p>
         </div>
-        <div class="wlbox"><div class="stack"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/cloud/">Pricing &amp; details <Icon name="arrow-right" /></a></div></div>
+        {site.demoUrl ? <div class="wlbox"><a class="btn lg" href={site.demoUrl}>See this site’s live stats <Icon name="arrow-right" /></a></div> : null}
       </div>
     </div>
   </section>
@@ -116,11 +125,7 @@ const ld = [
   <section class="section" id="faq">
     <div class="wrap">
       <div class="section-head"><h2>Questions, answered plainly.</h2></div>
-      <div class="card faq">
-        {faqs.map((f) => (
-          <details><summary>{f.q}<Icon name="chevron-down" /></summary><p>{f.a}</p></details>
-        ))}
-      </div>
+      <Faq items={faqs} />
     </div>
   </section>
 
@@ -129,8 +134,8 @@ const ld = [
       <div class="card end">
         <div class="mark"><Logo variant="mark" /></div>
         <h2>Clear water. Honest numbers.</h2>
-        <p class="muted">Download Tidemark, upload it, and see your first visitor in about ten minutes.</p>
-        <div class="cta"><a class="btn primary lg" href={site.downloadUrl}><Icon name="download" />Download v<span data-ver>{site.version}</span></a><a class="btn lg" href={site.installDocsUrl}>Install guide</a></div>
+        <p class="muted">Create a free account and see your first visitor in about two minutes.</p>
+        <div class="cta"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/self-host/">Self-host instead</a></div>
       </div>
     </div>
   </section>
@@ -139,28 +144,22 @@ const ld = [
   .hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 72px); }
   .hero h1 { margin-bottom: 20px; }
   .tide { color: var(--accent); }
-  .lede { max-width: 58ch; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; color: var(--ink-2); }
-  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-  .meta { margin-top: 16px; font-size: 13px; color: var(--ink-3); }
+  .lede { max-width: 60ch; font-size: clamp(17px, 1.6vw, 19px); line-height: 1.55; color: var(--ink-2); }
+  .lede b { color: var(--ink); font-weight: 600; }
+  .meta { margin-top: 16px; font-size: 13.5px; color: var(--ink-3); }
   .shot { margin-top: clamp(36px, 5vw, 60px); }
   .body { color: var(--ink-2); font-size: 14.5px; line-height: 1.6; margin-top: 6px; }
   .small { font-size: 13px; }
   .grid3 :global(.empty-ico) { margin-bottom: 14px; }
-  .card.hl { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
   .more { margin-top: 24px; font-size: 14px; color: var(--ink-3); }
-  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 72px); align-items: start; }
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 72px); align-items: center; }
   .split > * { min-width: 0; } @media (max-width: 860px) { .split { grid-template-columns: minmax(0, 1fr); } }
-  .steps { padding-left: 1.2em; margin: 20px 0 24px; color: var(--ink-2); font-size: 15px; } .steps li { margin-bottom: 12px; padding-left: 4px; } .steps b { color: var(--ink); font-weight: 600; }
+  .steps { padding-left: 1.3em; margin: 20px 0 24px; color: var(--ink-2); font-size: 15.5px; display: grid; gap: 12px; } .steps li { padding-left: 6px; } .steps b { color: var(--ink); font-weight: 600; }
   .stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .cloud { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: center; padding: clamp(24px, 4vw, 40px); }
-  .cloud h2 { margin-bottom: 10px; } .big { font-size: 16px; margin-top: 0; } .wlbox { min-width: 0; }
-  @media (max-width: 860px) { .cloud { grid-template-columns: minmax(0, 1fr); } }
-  .faq details { border-bottom: 1px solid var(--line); } .faq details:last-child { border-bottom: 0; }
-  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 20px; font-weight: 580; font-size: 15px; }
-  .faq summary::-webkit-details-marker { display: none; } .faq summary:hover { background: var(--surface-2); } .faq summary :global(.ico) { color: var(--ink-3); transition: transform .2s var(--ease); }
-  .faq details[open] summary :global(.ico) { transform: rotate(180deg); }
-  .faq p { padding: 0 20px 18px; color: var(--ink-2); max-width: 68ch; font-size: 14.5px; }
+  .dogfood { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; align-items: center; padding: clamp(24px, 4vw, 40px); }
+  .dogfood h2 { margin-bottom: 10px; } .big { font-size: 16px; margin-top: 0; } .wlbox { min-width: 0; display: flex; justify-content: flex-end; }
+  @media (max-width: 860px) { .dogfood { grid-template-columns: minmax(0, 1fr); } .wlbox { justify-content: flex-start; } }
   .closing { padding: clamp(56px, 8vw, 96px) 0; border-top: 1px solid var(--line); }
-  .end { max-width: 440px; margin: 0 auto; padding: 32px; text-align: center; border-radius: 18px; box-shadow: var(--shadow-pop); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .end { max-width: 460px; margin: 0 auto; padding: 32px; text-align: center; border-radius: 18px; box-shadow: var(--shadow-pop); display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .end .mark :global(svg) { height: 36px; width: auto; color: var(--ink); } .end h2 { font-size: 24px; margin-top: 8px; } .end .cta { justify-content: center; margin-top: 14px; }
 </style>

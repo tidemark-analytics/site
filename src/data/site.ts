@@ -21,7 +21,7 @@ export const site = {
   name: 'Tidemark',
   tagline: 'Measure the tide, not the footprints.',
   description:
-    'Privacy-first web analytics that runs on any PHP host — or on ours. No cookies, no stored IP addresses, one light dashboard.',
+    'Privacy-first web analytics, hosted for you or on any PHP host. No cookies, no stored IP addresses, one light dashboard. Free to start.',
   repoUrl: `https://github.com/${repo}`,
   downloadUrl: `https://github.com/${repo}/releases/latest`,
   releaseUrl: `https://github.com/${repo}/releases/tag/v${version}`, // this release's notes and downloads
@@ -40,8 +40,9 @@ export const site = {
 
 export const nav = [
   { href: '/features/', label: 'Features' },
+  { href: '/cloud/', label: 'Pricing' },
+  { href: '/compare/', label: 'Compare' },
+  { href: '/self-host/', label: 'Self-host' },
   { href: site.docsUrl, label: 'Docs' },
   { href: '/privacy/', label: 'Privacy' },
-  { href: '/compare/', label: 'Compare' },
-  { href: '/cloud/', label: 'Cloud & pricing' },
 ];
