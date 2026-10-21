@@ -1,0 +1,11 @@
+---
+const { kicker, title } = Astro.props;
+---
+<section class="wash pagehero">
+  <div class="wrap">
+    <span class="pill brand kicker"><slot name="kicker-icon" />{kicker}</span>
+    <h1>{title}</h1>
+    <p class="lede"><slot /></p>
+    <slot name="actions" />
+  </div>
+</section>

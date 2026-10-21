@@ -3,7 +3,7 @@ import { site } from '../data/site';
 ---
 <div class="plans3">
   <article class="card pad plan">
-    <h3>Cloud Free</h3>
+    <div class="plan-head"><h3>Cloud Free</h3></div>
     <p class="tag">Try it on a real site.</p>
     <div class="price">$0</div>
     <p class="alt">No credit card needed</p>
@@ -11,8 +11,7 @@ import { site } from '../data/site';
     <a class="btn lg" href={site.signupUrl}>Start free</a>
   </article>
   <article class="card pad plan hl">
-    <span class="pill brand">Most popular</span>
-    <h3>Cloud Pro</h3>
+    <div class="plan-head"><h3>Cloud Pro</h3><span class="pill brand">Most popular</span></div>
     <p class="tag">For sites that grow.</p>
     <div class="price">$7 <small>/ month</small></div>
     <p class="alt">or $70 a year, two months free</p>
@@ -20,7 +19,7 @@ import { site } from '../data/site';
     <a class="btn primary lg" href={site.signupUrl}>Start free, upgrade later</a>
   </article>
   <article class="card pad plan">
-    <h3>Self-hosted</h3>
+    <div class="plan-head"><h3>Self-hosted</h3></div>
     <p class="tag">Run it yourself.</p>
     <div class="price">$0 <small>forever</small></div>
     <p class="alt">You provide the PHP host</p>

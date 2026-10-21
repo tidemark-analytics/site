@@ -1,34 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import { site } from '../data/site';
 const groups = [
-  { icon: 'chart-column', t: 'Dashboard', items: ['Six headline metrics: visitors, visits, pageviews, views per visit, bounce rate, visit duration.', 'Comparison with the previous period or the same period last year.', 'Graph with hour, day, week or month intervals, keyboard control and a “view as table” twin.', 'Realtime view and a live “online now” count.'] },
-  { icon: 'layers', t: 'Reports', items: ['Sources: channels, sources and UTM campaigns.', 'Pages: top, entry and exit pages.', 'Locations: world map, countries, regions and cities.', 'Devices: browsers, operating systems and device types.', 'Every list has a details view with search and paging.'] },
-  { icon: 'funnel', t: 'Filters and periods', items: ['Click any row to filter, or use the filter menu: is, is not, contains, does not contain, wildcards such as /blog/*.', 'Today, realtime, 24 hours, 7, 28, 30 and 91 days, month, 6 and 12 months, year, all time, or a custom range.', 'Keyboard shortcuts for every period.'] },
-  { icon: 'target', t: 'Goals and events', items: ['Custom events with properties, and page goals.', 'Optional script variants add outbound links, file downloads, form submissions and tagged click events.', 'Filtering by a goal switches the dashboard to conversion mode.'] },
-  { icon: 'users', t: 'Sharing and people', items: ['Public dashboards, or private shared links with an optional password.', 'Owner, admin and viewer roles per site.', 'Two-factor sign-in.'] },
-  { icon: 'shield', t: 'Shields', items: ['Block rules by IP address, country or page.', 'A hostname allow-list so only your own domains are counted.', 'Data retention: delete raw data older than N days, on a schedule.'] },
-  { icon: 'key', t: 'API and export', items: ['Stats API v1 that follows Plausible’s query format, with bearer-token API keys.', 'Events API: POST /api/event, compatible with Plausible’s.', 'CSV export of everything on the dashboard for the selected period and filters.'] },
-  { icon: 'server', t: 'Built for shared hosting', items: ['PHP 8.3+ with common extensions. SQLite, MySQL, MariaDB or PostgreSQL.', 'Web installer, one-click in-app updates (or upload a zip), and a root .htaccess that protects internals.', 'Behind Cloudflare or a similar CDN, the real client IP and country are read from its headers.'] },
+  { icon: 'chart-column', t: 'One-page dashboard', d: 'Six headline metrics (visitors, visits, pageviews, views per visit, bounce rate and visit duration), compared with the previous period or the same period last year. The graph switches between hour, day, week and month, every chart has a table view, and a realtime count shows who is online now.' },
+  { icon: 'layers', t: 'Reports', d: 'Sources by channel, source and UTM campaign. Top, entry and exit pages. A world map with countries, regions and cities. Browsers, operating systems and device types. Every list opens into a details view with search and paging.' },
+  { icon: 'funnel', t: 'Filters and periods', d: 'Click any row to filter, or open the filter menu: is, is not, contains, does not contain, and wildcards such as /blog/*. Pick today, realtime, 24 hours, 7, 28, 30 or 91 days, a month, 6 or 12 months, a year, all time or a custom range, each with a keyboard shortcut.' },
+  { icon: 'target', t: 'Goals and events', d: 'Custom events with properties, and page goals. Script variants add outbound links, file downloads, form submissions and tagged click events, and filtering by a goal switches the dashboard to conversion mode.' },
+  { icon: 'users', t: 'Sharing and people', d: 'Make a dashboard public, or create private shared links with an optional password. Give people owner, admin or viewer roles per site, and protect accounts with two-factor sign-in.' },
+  { icon: 'shield', t: 'Shields and retention', d: 'Block traffic by IP address, country or page, and count only your own hostnames. Retention rules delete raw data older than a number of days, on a schedule.' },
+  { icon: 'key', t: 'API and export', d: 'A Stats API that follows Plausible’s query format, with bearer-token API keys, and an Events API at POST /api/event that is compatible with Plausible’s. Export the dashboard as CSV for any period and filter, or download a site’s full raw data to move it between installs.' },
+  { icon: 'server', t: 'Run it your way', d: 'Tidemark Cloud hosts it for you. Or install it yourself on PHP 8.3+ with SQLite, MySQL, MariaDB or PostgreSQL: a web installer, one-click updates, and real client IPs and countries read from Cloudflare or a similar CDN.' },
 ];
+
 ---
 <Base title="Features" description="Everything in Tidemark: a one-page dashboard, reports, filters, goals, sharing, a Plausible-style API and CSV export. Cookie-free and built for shared hosting." crumbs={[{ name: 'Features', path: '/features/' }]}>
-  <div class="wrap page-head">
-    <h1>Everything you check weekly.</h1>
-    <p class="lede">A small, complete set of tools for understanding your audience, without profiling anyone in it.</p>
-  </div>
-  <div class="wrap page-body">
+  <PageHero kicker="Features" title="Everything you check weekly.">A small, complete set of tools for understanding your audience, without profiling anyone in it.</PageHero>
+  <section class="section">
+  <div class="wrap">
     <div class="grid2">
       {groups.map((g) => (
         <section class="card pad feat">
           <div class="empty-ico"><Icon name={g.icon} /></div>
           <h3>{g.t}</h3>
-          <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+          <p>{g.d}</p>
         </section>
       ))}
     </div>
     <div class="notice" style="margin-top:16px"><Icon name="info" /><span>Not built yet: funnels, session replay and imports from other analytics tools (you can move a site between Tidemark installs). We would rather say so than imply otherwise.</span></div>
-    <div class="cta"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/self-host/"><Icon name="download" /><span>Self-host v<span data-ver>{site.version}</span></span></a></div>
   </div>
+  </section>
+  <ClosingCta />
 </Base>

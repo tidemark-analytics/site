@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
+import PageHero from '../components/PageHero.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 const cols = ['Tidemark', 'Plausible', 'Umami', 'Matomo', 'Fathom'];
 const rows = [
   ['Hosted version', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'],
@@ -13,31 +14,30 @@ const rows = [
 ];
 ---
 <Base title="Tidemark vs Plausible, Umami, Matomo and Fathom" description="How Tidemark compares with Plausible, Umami, Matomo and Fathom: where each runs, what self-hosting takes, and when a different tool is the better choice." crumbs={[{ name: 'Compare', path: '/compare/' }]}>
-  <div class="wrap page-head">
-    <h1>Tidemark and the alternatives.</h1>
-    <p class="lede">All of these are good tools. The real difference is where they run and how much you want to operate. Here is the honest version.</p>
-  </div>
-  <div class="wrap page-body">
+  <PageHero kicker="Compare" title="Tidemark and the alternatives.">All of these are good tools. The real difference is where they run and how much you want to operate. Here is the honest version.</PageHero>
+  <section class="section">
+  <div class="wrap">
     <div class="card tscroll"><table class="t">
       <thead><tr><th><span class="sr-only">Feature</span></th>{cols.map((c, i) => <th class={i === 0 ? 'us' : ''}>{c}</th>)}</tr></thead>
       <tbody>{rows.map((r) => <tr><th>{r[0]}</th>{r.slice(1).map((c, i) => <td class={i === 0 ? 'us' : ''}>{c}</td>)}</tr>)}</tbody>
     </table></div>
-    <p class="muted" style="font-size:13px;margin:12px 0 0">Based on public information from each project. Products and prices change, so check their pages before you decide, and tell us if something here is out of date.</p>
-    <div class="prose">
-      <h2>Choose Tidemark if</h2>
-      <ul>
-        <li>You want hosted analytics with a real free plan and one flat paid plan at $7 a month, and the freedom to leave with your data.</li>
-        <li>You already pay for PHP hosting and want analytics on it, without running Node, Docker or a database cluster.</li>
-        <li>You want one calm dashboard and a script that is about 2 KB gzipped.</li>
-        <li>You already use Plausible’s script or API and want to point it somewhere you control.</li>
-      </ul>
-      <h2>Choose something else if</h2>
-      <ul>
-        <li><strong>You want the most established managed service.</strong> Plausible and Fathom are mature, hosted and well run, and have been for years. Tidemark Cloud is newer.</li>
-        <li><strong>You need funnels, retention, session replay or revenue reports.</strong> Umami and Matomo go much further than Tidemark does.</li>
-        <li><strong>You need to import years of history.</strong> Tidemark can’t import from other tools yet.</li>
-      </ul>
-      <div class="cta"><a class="btn primary lg" href={site.signupUrl}>Start free</a><a class="btn lg" href="/self-host/">Self-host instead</a></div>
+    <p class="finep">Based on public information from each project. Products and prices change, so check their pages before you decide, and tell us if something here is out of date.</p>
+    <div class="grid2 choose">
+      <section class="card pad feat">
+        <h2>Choose Tidemark if</h2>
+        <p><strong>You want hosted analytics with a real free plan.</strong> One flat paid plan at $7 a month, and the freedom to leave with your data.</p>
+        <p><strong>You already pay for PHP hosting.</strong> Run it there, without Node, Docker or a database cluster.</p>
+        <p><strong>You want one calm dashboard.</strong> The script is about 2 KB gzipped.</p>
+        <p><strong>You already use Plausible’s script or API.</strong> Point it somewhere you control.</p>
+      </section>
+      <section class="card pad feat">
+        <h2>Choose something else if</h2>
+        <p><strong>You want the most established managed service.</strong> Plausible and Fathom are mature, hosted and well run, and have been for years. Tidemark Cloud is newer.</p>
+        <p><strong>You need funnels, retention, session replay or revenue reports.</strong> Umami and Matomo go much further than Tidemark does.</p>
+        <p><strong>You need to import years of history.</strong> Tidemark can’t import from other tools yet.</p>
+      </section>
     </div>
   </div>
+  </section>
+  <ClosingCta />
 </Base>
