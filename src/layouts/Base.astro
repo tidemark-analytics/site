@@ -57,7 +57,7 @@ if (crumbs.length) {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={og} />
     <script defer data-domain="tidemarkanalytics.com" src="https://app.tidemarkanalytics.com/js/script.outbound-links.file-downloads.form-submissions.js"></script>
-    <script define:vars={{ endpoint: site.latestEndpoint }}>
+    <script define:vars={{ endpoint: site.latestEndpoint, releases: site.repoReleasesUrl }}>
       // Keep the version shown on download buttons current between rebuilds. Asks this site's own /latest.php (which caches
       // GitHub's answer), never GitHub itself, so visitors' browsers make no third-party request.
       window.addEventListener('load', () => {
@@ -73,6 +73,8 @@ if (crumbs.length) {
             if (diff <= 0) return;
             document.querySelectorAll('[data-ver]').forEach((el) => { el.textContent = d.version; });
             if (typeof d.url === 'string' && d.url.startsWith('https://github.com/')) document.querySelectorAll('a[data-release]').forEach((a) => { a.href = d.url; });
+            // direct download links follow the version too
+            document.querySelectorAll('a[data-zip]').forEach((a) => { a.href = `${releases}/download/v${d.version}/tidemark-${d.version}.zip`; });
           })
           .catch(() => {});
       });

@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 ---
 <div class="plans3">
   <article class="card pad plan">
@@ -24,6 +25,6 @@ import { site } from '../data/site';
     <div class="price">$0 <small>forever</small></div>
     <p class="alt">You provide the PHP host</p>
     <ul class="ticks"><li>MIT license, unlimited everything</li><li>Any PHP 8.3+ host, even shared</li><li>Your data in your own database</li><li>One-click in-app updates</li></ul>
-    <a class="btn lg" href="/self-host/">How self-hosting works</a>
+    <a class="btn lg" href={site.zipUrl} data-zip><Icon name="download" /><span>Download v<span data-ver>{site.version}</span></span></a>
   </article>
 </div>

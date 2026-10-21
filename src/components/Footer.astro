@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
       <div><a href="/" class="brand" aria-label="Tidemark — home"><Logo /></a><p class="about">Privacy-first web analytics, hosted for you or on any PHP host.</p></div>
       <nav aria-label="Product"><h2>Product</h2><a href="/features/">Features</a><a href="/cloud/">Pricing</a><a href="/compare/">Compare</a><a href={site.docsUrl}>Docs</a><a href={site.appUrl}>Sign in</a></nav>
       <nav aria-label="Legal"><h2>Legal</h2><a href="/privacy/">Privacy</a><a href="/privacy/#cloud">Cloud privacy notice</a><a href="/terms/">Terms</a><a href="/refunds/">Refunds</a></nav>
-      <nav aria-label="Project"><h2>Self-host</h2><a href="/self-host/">How it works</a><a href={site.downloadUrl}>Download v<span data-ver>{site.version}</span></a><a href={site.releaseUrl} data-release>Release notes</a><a href={site.repoUrl}>Source on GitHub</a></nav>
+      <nav aria-label="Project"><h2>Self-host</h2><a href="/self-host/">How it works</a><a href={site.zipUrl} data-zip>Download v<span data-ver>{site.version}</span> (zip)</a><a href={site.releaseUrl} data-release>Release notes</a><a href={site.repoUrl}>Source on GitHub</a></nav>
     </div>
     <div class="foot-base"><span>© {year} Tidemark · MIT license</span><span>This site sets no cookies and measures itself with Tidemark. <a href={site.demoUrl}>See the stats</a>.</span></div>
   </div>

@@ -22,7 +22,7 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: 
     Upload a zip, open <code>/install</code>, and read your traffic on one calm page. Free forever, with your data in a database you control. Prefer not to run anything? <a class="link" href="/cloud/">Tidemark Cloud</a> is the same dashboard, hosted for you.
     <Fragment slot="actions">
       <div class="cta">
-        <a class="btn primary lg" href={site.downloadUrl}><Icon name="download" /><span>Download v<span data-ver>{site.version}</span></span></a>
+        <a class="btn primary lg" href={site.zipUrl} data-zip><Icon name="download" /><span>Download v<span data-ver>{site.version}</span> (zip)</span></a>
         <a class="btn lg" href={site.installDocsUrl}>Install guide <Icon name="arrow-right" /></a>
       </div>
       <p class="meta">Latest: <a href={site.releaseUrl} data-release>v<span data-ver>{site.version}</span></a> · {site.requirements} · SQLite, MySQL, MariaDB or PostgreSQL · no Node, Docker or SSH</p>

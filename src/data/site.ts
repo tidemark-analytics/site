@@ -24,6 +24,8 @@ export const site = {
     'Privacy-first web analytics, hosted for you or on any PHP host. No cookies, no stored IP addresses, one light dashboard. Free to start.',
   repoUrl: `https://github.com/${repo}`,
   downloadUrl: `https://github.com/${repo}/releases/latest`,
+  zipUrl: `https://github.com/${repo}/releases/download/v${version}/tidemark-${version}.zip`, // the install zip itself, so "Download" starts a download
+  repoReleasesUrl: `https://github.com/${repo}/releases`,
   releaseUrl: `https://github.com/${repo}/releases/tag/v${version}`, // this release's notes and downloads
   demoUrl: 'https://app.tidemarkanalytics.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
