@@ -7,10 +7,16 @@ import PageHero from '../../components/PageHero.astro';
 import ClosingCta from '../../components/ClosingCta.astro';
 import { site } from '../../data/site';
 
+const ossDocs = 'https://docs.tidemarkanalytics.com/article/135-open-source-program';
+const nonprofitDocs = 'https://docs.tidemarkanalytics.com/article/136-non-profit-discount';
+
 const faqs = [
   { q: 'What counts as an event?', a: 'Pageviews and custom events (such as a signup or a download click). Visits, sessions and the dashboard itself are not counted.' },
   { q: 'What happens if I go over my events?', a: 'On Free, new events stop being recorded until the month resets, and everything already collected stays. On Pro, 250,000 events a month are included (3,000,000 a year on the yearly plan). We email you at 80% and 100% of the events available to you. At 100% recording pauses until you top up with an extra-events pack or your billing period resets; everything already collected stays.' },
   { q: 'How do extra events work?', a: 'From Account settings → Plan & billing you can buy packs of 250,000 events for $5, as many as you like. They are used only after your included events, don’t expire while your account is open, and you are never charged automatically, so there are no surprise bills. Unused packs can be refunded within 30 days.' },
+  { q: 'Is Pro free for open-source projects?', a: 'Yes, for non-commercial open-source projects: Pro is free, and you only pay if you go over the events included with Pro (extra event packs, at the normal price). The project must be open source and must not sell anything: no paid products, plans, hosting or support, and no ads. Approvals are reviewed by hand and last a year at a time. Email support@tidemarkanalytics.com with the project name, repository link, license and the site you want to measure.' },
+  { q: 'Do you offer a discount for non-profits?', a: 'Yes: registered non-profits and charities get Pro for 50% off ($3.50 a month or $35 a year). Email support@tidemarkanalytics.com with the organisation’s legal name, website and official government documentation of its non-profit status. Approvals are reviewed by hand and last a year at a time.' },
+  { q: 'What happens when a yearly approval ends?', a: 'About 30 days before an open-source or non-profit approval ends we check that you still qualify, and we may email you. If you do, we renew it for another year. If you don’t, or we can’t confirm it, it ends on its date: open-source accounts return to Free, and non-profit subscriptions continue at the normal price until cancelled.' },
   { q: 'What support do I get?', a: 'Cloud customers, on Free and Pro alike, get direct support: write to us from inside the app or at support@tidemarkanalytics.com and a person replies. Self-hosted installs are supported by the community on GitHub.' },
   { q: 'Can I cancel any time?', a: 'Yes. Cancel from Account settings → Plan & billing. Pro stays active until the end of the period you paid for. Within 30 days of any payment you can also ask for a full refund, no questions asked.' },
   { q: 'Who handles payments and tax?', a: 'Creem, our merchant of record. They process the payment, issue the receipt, and collect and remit VAT or sales tax, which may be added to the price at checkout.' },
@@ -34,6 +40,16 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'Product', name: 'Tidem
       <div class="section-head"><h2>Simple pricing</h2><p>One paid plan. Prices are in US dollars; any VAT or sales tax is added at checkout.</p></div>
       <PlanCards />
       <p class="finep">Cancel any time. Full refund within 30 days of any payment, no questions asked: see the <a class="link" href="/refunds/">refund policy</a>. Payments are processed by Creem, our merchant of record.</p>
+    </div>
+  </section>
+
+  <section class="section" id="programs">
+    <div class="wrap">
+      <div class="section-head"><h2>Open source and non-profits</h2><p>If your project or organisation fits, you shouldn’t have to pay full price. Both are reviewed by a person and renewed a year at a time.</p></div>
+      <div class="grid2">
+        <div class="card pad feat"><div class="empty-ico"><Icon name="code" /></div><h3>Open-source projects: Pro for free</h3><p>For non-commercial open-source projects that don’t sell anything. You get everything in Pro and only pay if you go over its events, with extra event packs at the normal price.</p><div class="cta" style="margin-top:18px"><a class="textlink" href={ossDocs}>How to apply <Icon name="arrow-right" /></a></div></div>
+        <div class="card pad feat"><div class="empty-ico"><Icon name="users" /></div><h3>Non-profits: 50% off Pro</h3><p>For registered non-profits and charities: $3.50 a month or $35 a year. We ask for official government documentation of your status when you apply.</p><div class="cta" style="margin-top:18px"><a class="textlink" href={nonprofitDocs}>How to apply <Icon name="arrow-right" /></a></div></div>
+      </div>
     </div>
   </section>
 
