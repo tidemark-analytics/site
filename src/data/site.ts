@@ -29,7 +29,7 @@ export const site = {
   releaseUrl: `https://github.com/${repo}/releases/tag/v${version}`, // this release's notes and downloads
   demoUrl: 'https://app.tidemarkanalytics.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
-  installDocsUrl: 'https://docs.tidemarkanalytics.com/install/shared-hosting/',
+  installDocsUrl: 'https://docs.tidemarkanalytics.com/article/101-install-shared-hosting',
   appUrl: 'https://app.tidemarkanalytics.com',
   signupUrl: 'https://app.tidemarkanalytics.com/register',
   operator: 'Michael Kinder',

@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# Deploys the Tidemark marketing site and docs from their latest GitHub releases. Run it from cron.
+# Deploys the Tidemark marketing site from its latest GitHub release. Run it from cron.
 #
 #   deploy-sites.sh              deploy whatever is newer than what is installed
 #   deploy-sites.sh --dry-run    show what would happen, change nothing
 #   deploy-sites.sh --force      reinstall the latest release even if it is already installed
-#   deploy-sites.sh --site=docs  only one site (names are listed under SITES below)
 #
 # What it does for each site: asks GitHub for the latest release, downloads the zip, checks its SHA-256 checksum, unpacks
 # it to a temporary folder, sanity-checks it, saves a backup of the files it is about to replace, copies the new files
@@ -24,7 +23,6 @@ KEEP_BACKUPS=3
 # name | GitHub repo | release asset (the zip) | web root
 SITES=(
   "site|tidemark-analytics/site|tidemark-site.zip|$BASE_DIR/public_html"
-  "docs|tidemark-analytics/docs|tidemark-docs.zip|$BASE_DIR/docs.tidemarkanalytics.com"
 )
 
 # ------------------------------------------------------------------------------------------------ helpers

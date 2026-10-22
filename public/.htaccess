@@ -40,5 +40,5 @@ ErrorDocument 404 /404.html
 
 # The install guide now lives in the docs
 <IfModule mod_rewrite.c>
-  RewriteRule ^install/?$ https://docs.tidemarkanalytics.com/install/shared-hosting/ [R=301,L]
+  RewriteRule ^install/?$ https://docs.tidemarkanalytics.com/article/101-install-shared-hosting [R=301,L]
 </IfModule>
