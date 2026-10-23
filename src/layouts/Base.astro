@@ -57,9 +57,6 @@ if (crumbs.length) {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={og} />
     <script defer data-domain="tidemarkanalytics.com" src="https://app.tidemarkanalytics.com/js/script.outbound-links.file-downloads.form-submissions.js"></script>
-    <!-- Help Scout Beacon: the sales chat -->
-    <script is:inline type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
-    <script is:inline type="text/javascript">window.Beacon('init', '4bad3804-2e7f-4b3b-a246-6d7d637a778a')</script>
     <script define:vars={{ endpoint: site.latestEndpoint, releases: site.repoReleasesUrl }}>
       // Keep the version shown on download buttons current between rebuilds. Asks this site's own /latest.php (which caches
       // GitHub's answer), never GitHub itself, so visitors' browsers make no third-party request.
@@ -89,5 +86,35 @@ if (crumbs.length) {
     <Header />
     <main id="main"><slot /></main>
     <Footer />
+    <!-- Sales chat. Help Scout's Beacon is only requested after someone clicks this; without JavaScript (or if the script is blocked) it is a plain email link. -->
+    <a class="sales-btn" id="sales-chat" href={`mailto:${site.supportEmail}`} aria-label="Talk to sales" data-beacon="4bad3804-2e7f-4b3b-a246-6d7d637a778a">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+      <span>Talk to sales</span>
+    </a>
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('sales-chat');
+        if (!btn) return;
+        var started = false;
+        function load() {
+          started = true;
+          var b = window.Beacon = function (m, o, d) { b.readyQueue.push({ method: m, options: o, data: d }); };
+          b.readyQueue = [];
+          var s = document.createElement('script');
+          s.async = true; s.src = 'https://beacon-v2.helpscout.net';
+          s.onerror = function () { started = false; window.location.href = btn.getAttribute('href'); }; // blocked: fall back to email
+          document.head.appendChild(s);
+          b('init', btn.getAttribute('data-beacon'));
+          b('config', { display: { style: 'manual' } }); // our button is the launcher
+          b('on', 'open', function () { btn.hidden = true; });
+          b('on', 'close', function () { btn.hidden = false; });
+        }
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (!started) load();
+          window.Beacon('open');
+        });
+      })();
+    </script>
   </body>
 </html>
