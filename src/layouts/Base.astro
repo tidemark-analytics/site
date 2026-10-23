@@ -57,6 +57,9 @@ if (crumbs.length) {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={og} />
     <script defer data-domain="tidemarkanalytics.com" src="https://app.tidemarkanalytics.com/js/script.outbound-links.file-downloads.form-submissions.js"></script>
+    <!-- Help Scout Beacon: the sales chat -->
+    <script is:inline type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+    <script is:inline type="text/javascript">window.Beacon('init', '4bad3804-2e7f-4b3b-a246-6d7d637a778a')</script>
     <script define:vars={{ endpoint: site.latestEndpoint, releases: site.repoReleasesUrl }}>
       // Keep the version shown on download buttons current between rebuilds. Asks this site's own /latest.php (which caches
       // GitHub's answer), never GitHub itself, so visitors' browsers make no third-party request.

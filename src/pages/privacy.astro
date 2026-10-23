@@ -31,12 +31,13 @@ const rows = [
       <ul>
         <li><strong>Account data:</strong> your name, email address, a hashed password, your timezone and the settings you choose (sites, goals, shield rules, API keys, team members you add).</li>
         <li><strong>Billing data:</strong> payments are processed by <a href="https://www.creem.io" rel="noopener">Creem</a>, our merchant of record. Creem collects your payment details, billing address and tax information. We receive only your plan, subscription status, customer ID and email, never your card number.</li>
+        <li><strong>Support messages:</strong> if you write to support, from the app’s chat widget or by email, we keep the conversation in Help Scout. Signed in, the widget also shows us your plan, number of sites, events this month, whether your email is confirmed and your account ID, so we can help you faster.</li>
         <li><strong>Statistics from your websites:</strong> aggregate visit and event rows as described above (page, referrer, country, browser, device, custom events). We don’t store visitors’ IP addresses or raw user agents.</li>
         <li><strong>Technical logs:</strong> our servers briefly keep standard access logs (IP address, requested address, status) to run, secure and debug the service. They are rotated automatically and kept only as long as needed.</li>
         <li><strong>Emails we send you:</strong> confirmation and password-reset messages, usage notices (for example when you reach your monthly event limit) and subscription notices. We don’t send marketing email without your consent.</li>
       </ul>
       <h3>Cookies and local storage</h3>
-      <p>When you sign in to the dashboard we set one essential session cookie. The tracking script we give you sets no cookies and uses no local storage on your visitors’ devices. The dashboard remembers your light or dark choice and a few interface preferences in your browser’s local storage. We use no advertising or cross-site tracking cookies.</p>
+      <p>When you sign in to the dashboard we set one essential session cookie. The tracking script we give you sets no cookies and uses no local storage on your visitors’ devices. The dashboard remembers your light or dark choice and a few interface preferences in your browser’s local storage. The support widget in the dashboard, which comes from Help Scout, may also store a small amount of data in your browser to remember a conversation. We use no advertising or cross-site tracking cookies.</p>
       <h3>Why we use it</h3>
       <ul>
         <li>To provide the service and your account (performing our contract with you);</li>
@@ -45,7 +46,7 @@ const rows = [
         <li>To contact you about the service (contract and legitimate interests).</li>
       </ul>
       <h3>Who we share it with</h3>
-      <p>We don’t sell personal data and we don’t share it with advertisers. We use a small number of providers to run the service: <strong>Creem</strong> (payments), <strong>OVHcloud</strong> (server hosting), <strong>Cloudflare</strong> (network security and delivery) and <strong>hosting.com</strong> (outgoing email). Some of them process data in the United States or elsewhere outside your country, under their own data protection commitments. We may also disclose information where the law requires it.</p>
+      <p>We don’t sell personal data and we don’t share it with advertisers. We use a small number of providers to run the service: <strong>Creem</strong> (payments), <strong>OVHcloud</strong> (server hosting), <strong>Cloudflare</strong> (network security and delivery), <strong>hosting.com</strong> (outgoing email) and <strong>Help Scout</strong> (customer support, including the chat widget on this site and in the app). Some of them process data in the United States or elsewhere outside your country, under their own data protection commitments. We may also disclose information where the law requires it.</p>
       <h3>How long we keep it</h3>
       <ul>
         <li>Account data: while your account is open, and for up to 30 days after you delete it.</li>
@@ -60,8 +61,9 @@ const rows = [
       <h3>Children and changes</h3>
       <p>The service is not intended for people under 16. If we change this notice in a way that matters, we’ll update the date above and notify you by email or in the dashboard.</p>
 
-      <h2>This website</h2>
-      <p>This site sets no cookies and loads no third-party scripts, fonts or trackers. It measures itself with Tidemark, installed on our own server, and the resulting dashboard is public so you can see exactly what is collected. The only thing stored in your browser is your light or dark theme choice, if you change it. Personal data for Tidemark Cloud accounts is covered in the notice above.</p>
+      <h2 id="website">This website</h2>
+      <p>This site measures itself with Tidemark, installed on our own server. The tracking script sets no cookies and the resulting dashboard is public, so you can see exactly what is collected. The site loads no advertising or analytics scripts from anyone else and no third-party fonts.</p>
+      <p>It does load one third-party script: the chat widget from <a href="https://www.helpscout.com" rel="noopener">Help Scout</a>, which lets you message our sales team. Loading it contacts Help Scout’s servers, and the widget may store a small amount of data in your browser (cookies or local storage) so it can remember a conversation. If you send a message, Help Scout receives what you write, your email address and your name if you give it, and handles it under <a href="https://www.helpscout.com/company/legal/privacy/" rel="noopener">its own privacy policy</a>. We use it only to reply to you. The only other thing stored in your browser is your light or dark theme choice, if you change it. Personal data for Tidemark Cloud accounts is covered in the notice above.</p>
     </div>
   </div>
 </Base>

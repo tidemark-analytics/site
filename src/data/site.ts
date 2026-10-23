@@ -36,7 +36,7 @@ export const site = {
   signupUrl: 'https://app.tidemarkanalytics.com/register',
   operator: 'Michael Kinder',
   supportEmail: 'support@tidemarkanalytics.com',
-  legalUpdated: 'October 21, 2026',
+  legalUpdated: 'October 23, 2026',
   version, // refreshed from GitHub at build time, and in the browser via /latest.php
   latestEndpoint: '/latest.php', // PHP endpoint shipped in /public that proxies the GitHub API (cached)
   requirements: 'PHP 8.3+',
