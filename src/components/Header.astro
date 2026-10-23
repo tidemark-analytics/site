@@ -16,7 +16,8 @@ const path = Astro.url.pathname;
     <div class="top-actions">
       <button class="btn ghost icon" id="theme" type="button" aria-label="Toggle theme"><span class="theme-moon"><Icon name="moon" /></span><span class="theme-sun"><Icon name="sun" /></span></button>
       <a class="btn ghost signin" href={site.appUrl}>Sign in</a>
-      <a class="btn primary" href={site.signupUrl}>Start free</a>
+      <a class="btn primary start" href={site.signupUrl}>Start free</a>
+      <a class="btn primary nav-dash" href={`${site.appUrl}/sites`}>Dashboard</a>
       <button class="btn ghost icon menu-btn" id="menu" type="button" aria-expanded="false" aria-controls="topnav" aria-label="Menu"><svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
     </div>
   </div>

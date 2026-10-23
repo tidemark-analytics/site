@@ -212,5 +212,10 @@ table.t tbody tr:hover > .us { background: var(--accent-soft); }
 .finep { margin-top: 20px; font-size: 13.5px; color: var(--ink-3); line-height: 1.55; }
 .finep a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
+/* signed in to the app (a small cookie it keeps on this domain, read in the page head): Dashboard replaces Sign in and Start free */
+.nav-dash { display: none; }
+.signed-in .top-actions .signin, .signed-in .top-actions .start { display: none !important; }
+.signed-in .top-actions .nav-dash { display: inline-flex; }
+.signed-in .topnav .nav-signin { display: none !important; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; } }
 @media (forced-colors: active) { .btn { border: 1px solid ButtonText; } }

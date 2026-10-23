@@ -36,7 +36,7 @@ if (crumbs.length) {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <script is:inline>try{var t=localStorage.getItem("tm-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+    <script is:inline>try{var t=localStorage.getItem("tm-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}try{if(/(?:^|; )tm_in=1(?:;|$)/.test(document.cookie))document.documentElement.classList.add("signed-in")}catch(e){}</script>
     <meta name="theme-color" content="#f4f7f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#081418" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

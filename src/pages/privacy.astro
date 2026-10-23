@@ -37,7 +37,7 @@ const rows = [
         <li><strong>Emails we send you:</strong> confirmation and password-reset messages, usage notices (for example when you reach your monthly event limit) and subscription notices. We don’t send marketing email without your consent.</li>
       </ul>
       <h3>Cookies and local storage</h3>
-      <p>When you sign in to the dashboard we set one essential session cookie. The tracking script we give you sets no cookies and uses no local storage on your visitors’ devices. The dashboard remembers your light or dark choice and a few interface preferences in your browser’s local storage. The support widget in the dashboard, which comes from Help Scout, may also store a small amount of data in your browser to remember a conversation. We use no advertising or cross-site tracking cookies.</p>
+      <p>When you sign in to the dashboard we set an essential session cookie and a second small flag cookie, <code>tm_in</code>, on the tidemarkanalytics.com domain. The flag holds no personal data, only that you are signed in, so our website and documentation can show a Dashboard button instead of Sign in. It is removed when you sign out. The tracking script we give you sets no cookies and uses no local storage on your visitors’ devices. The dashboard remembers your light or dark choice and a few interface preferences in your browser’s local storage. The support widget in the dashboard, which comes from Help Scout, may also store a small amount of data in your browser to remember a conversation. We use no advertising or cross-site tracking cookies.</p>
       <h3>Why we use it</h3>
       <ul>
         <li>To provide the service and your account (performing our contract with you);</li>
@@ -62,7 +62,7 @@ const rows = [
       <p>The service is not intended for people under 16. If we change this notice in a way that matters, we’ll update the date above and notify you by email or in the dashboard.</p>
 
       <h2>This website</h2>
-      <p>This site sets no cookies and loads no third-party scripts, fonts or trackers. It measures itself with Tidemark, installed on our own server, and the resulting dashboard is public so you can see exactly what is collected. The only thing stored in your browser is your light or dark theme choice, if you change it. Personal data for Tidemark Cloud accounts is covered in the notice above.</p>
+      <p>This site sets no cookies and loads no third-party scripts, fonts or trackers. It measures itself with Tidemark, installed on our own server, and the resulting dashboard is public so you can see exactly what is collected. The only thing stored in your browser is your light or dark theme choice, if you change it. If you are signed in to Tidemark Cloud, the site reads the <code>tm_in</code> flag cookie the app set, only to show a Dashboard button; it sets no cookies itself. Personal data for Tidemark Cloud accounts is covered in the notice above.</p>
     </div>
   </div>
 </Base>
