@@ -17,7 +17,7 @@ const faqs = [
 ];
 const ld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }];
 ---
-<Base title="Self-host Tidemark on any PHP host" description="Install Tidemark on ordinary PHP shared hosting in minutes: upload a zip, open /install, paste one line. Free and open source under the MIT license." jsonLd={ld} crumbs={[{ name: 'Self-host', path: '/self-host/' }]}>
+<Base title="Self-host Tidemark on any PHP host" description="Install Tidemark on ordinary PHP shared hosting in minutes, or run the Docker image: upload a zip or compose up, open /install, paste one line. Free and open source under the MIT license." jsonLd={ld} crumbs={[{ name: 'Self-host', path: '/self-host/' }]}>
   <PageHero kicker="Open source · MIT license" title="Run Tidemark on the hosting you already have.">
     Upload a zip, open <code>/install</code>, and read your traffic on one calm page. Free forever, with your data in a database you control. Prefer not to run anything? <a class="link" href="/cloud/">Tidemark Cloud</a> is the same dashboard, hosted for you.
     <Fragment slot="actions">
@@ -25,7 +25,7 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: 
         <a class="btn primary lg" href={site.zipUrl} data-zip><Icon name="download" /><span>Download v<span data-ver>{site.version}</span> (zip)</span></a>
         <a class="btn lg" href={site.installDocsUrl}>Install guide <Icon name="arrow-right" /></a>
       </div>
-      <p class="meta">Latest: <a href={site.releaseUrl} data-release>v<span data-ver>{site.version}</span></a> · {site.requirements} · SQLite, MySQL, MariaDB or PostgreSQL · no Node, Docker or SSH</p>
+      <p class="meta">Latest: <a href={site.releaseUrl} data-release>v<span data-ver>{site.version}</span></a> · {site.requirements} · SQLite, MySQL, MariaDB or PostgreSQL · no Node or SSH needed · <a href={site.dockerDocsUrl}>Docker image</a> too</p>
     </Fragment>
   </PageHero>
 
@@ -40,6 +40,7 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: 
           <li><b>Add a cron job</b> in cPanel, only if you want queued ingestion and data retention.</li>
         </ol>
         <a class="btn" href={site.installDocsUrl}>Full install guide <Icon name="arrow-right" /></a>
+        <div class="notice" style="margin-top:16px"><Icon name="server" /><span>Run a server or homelab? There’s a Docker image for amd64 and arm64: <code>docker compose up -d</code>, then open <code>/install</code>. <a class="link" href={site.dockerDocsUrl}>Docker guide</a></span></div>
       </div>
       <div class="stack">
         <p class="muted small">Paste this into your site</p>

@@ -30,6 +30,8 @@ export const site = {
   demoUrl: 'https://app.tidemarkanalytics.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
   installDocsUrl: 'https://docs.tidemarkanalytics.com/article/101-install-shared-hosting',
+  dockerDocsUrl: 'https://docs.tidemarkanalytics.com/article/137-install-with-docker',
+  dockerImage: 'ghcr.io/tidemark-analytics/tidemark',
   appUrl: 'https://app.tidemarkanalytics.com',
   signupUrl: 'https://app.tidemarkanalytics.com/register',
   operator: 'Michael Kinder',
