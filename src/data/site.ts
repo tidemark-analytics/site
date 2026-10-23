@@ -46,6 +46,7 @@ export const nav = [
   { href: '/features/', label: 'Features' },
   { href: '/cloud/', label: 'Pricing' },
   { href: '/compare/', label: 'Compare' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/self-host/', label: 'Self-host' },
   { href: site.docsUrl, label: 'Docs' },
   { href: '/privacy/', label: 'Privacy' },

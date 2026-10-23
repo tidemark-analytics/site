@@ -11,4 +11,5 @@ export default defineConfig({
   build: { format: 'directory', inlineStylesheets: 'auto' },
   integrations: [sitemap({ filter: (page) => !page.includes('/cloud/thanks/') })],
   compressHTML: true,
+  markdown: { syntaxHighlight: false },
 });

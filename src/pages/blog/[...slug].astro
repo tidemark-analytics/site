@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf() || a.data.order - b.data.order);
+  return posts.map((post, i) => ({ params: { slug: post.id }, props: { post, more: posts.filter((p) => p.id !== post.id).slice(0, 3) } }));
+}
+const { post, more } = Astro.props;
+const { Content, headings } = await render(post);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const url = new URL(`/blog/${post.id}/`, Astro.site).href;
+const toc = headings.filter((h) => h.depth === 2);
+const ld = [{
+  '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.data.title, description: post.data.description,
+  datePublished: post.data.date.toISOString(), dateModified: (post.data.updated ?? post.data.date).toISOString(),
+  mainEntityOfPage: url, image: new URL('/og.png', Astro.site).href,
+  author: { '@type': 'Organization', name: 'Tidemark', url: new URL('/', Astro.site).href },
+  publisher: { '@type': 'Organization', name: 'Tidemark', url: new URL('/', Astro.site).href, logo: { '@type': 'ImageObject', url: new URL('/icon-512.png', Astro.site).href } },
+}];
+---
+<Base title={post.data.title} description={post.data.description} jsonLd={ld} crumbs={[{ name: 'Blog', path: '/blog/' }, { name: post.data.title, path: `/blog/${post.id}/` }]}>
+  <article class="wrap page-head post">
+    <a class="back" href="/blog/"><Icon name="chevron-left" /> All articles</a>
+    <span class="pill brand">{post.data.tag}</span>
+    <h1>{post.data.title}</h1>
+    <p class="lede">{post.data.description}</p>
+    <p class="byline">By the Tidemark team · {fmt(post.data.date)}{post.data.updated && ` · updated ${fmt(post.data.updated)}`}{post.data.readingMinutes ? ` · ${post.data.readingMinutes} min read` : ''}</p>
+    <div class="notice disclose"><Icon name="info" /><span>We make Tidemark, so we are not a neutral party. We have tried to be fair, to say where other tools are the better choice, and to keep claims about other products to things you can check yourself.</span></div>
+  </article>
+  <div class="wrap page-body post">
+    {toc.length > 2 && (
+      <nav class="toc card" aria-label="On this page"><b>On this page</b>
+        <ul>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+      </nav>
+    )}
+    <div class="prose article"><Content /></div>
+    <aside class="card cta">
+      <h2>Try Tidemark</h2>
+      <p>Cookie-free, one-page analytics. Free to start on Tidemark Cloud, or run it yourself on any PHP host or in Docker.</p>
+      <div class="cta-row"><a class="btn primary" href={site.signupUrl}>Start free</a><a class="btn" href={site.demoUrl}>View the live demo</a><a class="textlink" href="/self-host/">Or self-host it <Icon name="arrow-right" /></a></div>
+    </aside>
+    <section class="more">
+      <h2>More from the blog</h2>
+      <div class="more-list">{more.map((p) => <a class="card" href={`/blog/${p.id}/`}><span class="pill">{p.data.tag}</span><b>{p.data.title}</b></a>)}</div>
+    </section>
+  </div>
+</Base>
+<style>
+  .post .back { display: flex; width: fit-content; align-items: center; gap: 4px; color: var(--ink-3); font-size: 14px; margin-bottom: 18px; text-decoration: none; }
+  .post .back:hover { color: var(--ink); }
+  .post h1 { margin-top: 14px; max-width: 24ch; }
+  .byline { color: var(--ink-3); font-size: 14px; margin-top: 14px; }
+  .disclose { margin-top: 22px; max-width: 720px; }
+  .toc { max-width: 720px; padding: 16px 20px; margin-bottom: 28px; }
+  .toc b { font-size: 13px; color: var(--ink-3); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .toc ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 5px; }
+  .toc a { color: var(--accent-ink); text-decoration: none; } .toc a:hover { text-decoration: underline; }
+  .article :global(h2) { scroll-margin-top: 80px; }
+  .article :global(table) { display: block; overflow-x: auto; width: 100%; border-collapse: collapse; margin: 16px 0 22px; font-size: 14.5px; }
+  .article :global(th), .article :global(td) { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .article :global(th) { color: var(--ink-3); font-weight: 600; font-size: 13px; white-space: nowrap; }
+  .article :global(td) { color: var(--ink-2); }
+  .article :global(pre) { overflow-x: auto; padding: 14px 16px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.55; margin: 14px 0 20px; }
+  .article :global(code) { font-family: var(--mono); font-size: .9em; }
+  .article :global(:not(pre) > code) { background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+  .article :global(blockquote) { margin: 18px 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--accent); color: var(--ink-2); }
+  .cta { max-width: 720px; margin-top: 44px; padding: 26px 28px; }
+  .cta h2 { font-size: 21px; letter-spacing: -.02em; } .cta p { color: var(--ink-2); margin: 8px 0 18px; }
+  .cta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .more { max-width: 720px; margin-top: 44px; } .more h2 { font-size: 18px; margin-bottom: 14px; }
+  .more-list { display: grid; gap: 10px; }
+  .more-list a { display: flex; align-items: center; gap: 12px; padding: 14px 18px; color: inherit; text-decoration: none; } .more-list a:hover { border-color: var(--line-2); }
+  .more-list b { font-weight: 560; font-size: 15px; }
+</style>
