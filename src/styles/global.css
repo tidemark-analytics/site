@@ -134,8 +134,6 @@ table.t tbody tr:hover > .us { background: var(--accent-soft); }
 .topnav a:hover { background: var(--surface-2); color: var(--ink); }
 .topnav a[aria-current="page"] { color: var(--ink); background: var(--surface-2); }
 .top-actions { display: flex; align-items: center; gap: 6px; }
-.theme-sun { display: none; } :root[data-theme="dark"] .theme-sun { display: inline; } :root[data-theme="dark"] .theme-moon { display: none; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme-sun { display: inline; } :root:not([data-theme="light"]) .theme-moon { display: none; } }
 .menu-btn { display: none; } .nav-signin { display: none !important; }
 @media (max-width: 820px) {
   .menu-btn { display: inline-flex; }

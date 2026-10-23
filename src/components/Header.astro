@@ -14,7 +14,6 @@ const path = Astro.url.pathname;
       <a class="nav-signin" href={site.appUrl}>Sign in</a>
     </nav>
     <div class="top-actions">
-      <button class="btn ghost icon" id="theme" type="button" aria-label="Toggle theme"><span class="theme-moon"><Icon name="moon" /></span><span class="theme-sun"><Icon name="sun" /></span></button>
       <a class="btn ghost signin" href={site.appUrl}>Sign in</a>
       <a class="btn primary start" href={site.signupUrl}>Start free</a>
       <a class="btn primary nav-dash" href={`${site.appUrl}/sites`}>Dashboard</a>
@@ -29,12 +28,5 @@ const path = Astro.url.pathname;
     const open = nav?.getAttribute('data-open') === 'true';
     nav?.setAttribute('data-open', String(!open));
     menu.setAttribute('aria-expanded', String(!open));
-  });
-  document.getElementById('theme')?.addEventListener('click', () => {
-    const root = document.documentElement;
-    const dark = root.getAttribute('data-theme') === 'dark' || (!root.hasAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-    const next = dark ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('tm-theme', next); } catch {}
   });
 </script>
