@@ -86,14 +86,14 @@ if (crumbs.length) {
     <Header />
     <main id="main"><slot /></main>
     <Footer />
-    <!-- Sales chat. Help Scout's Beacon is only requested after someone clicks this; without JavaScript (or if the script is blocked) it is a plain email link. -->
-    <a class="sales-btn" id="sales-chat" href={`mailto:${site.supportEmail}`} aria-label="Talk to sales" data-beacon="4bad3804-2e7f-4b3b-a246-6d7d637a778a">
+    <!-- Question chat (an AI assistant answering from the site and docs). Help Scout's Beacon is only requested after someone clicks this; without JavaScript (or if the script is blocked) it is a plain email link. -->
+    <a class="ask-btn" id="ask-chat" href={`mailto:${site.supportEmail}`} aria-label="Ask a question" data-beacon="4bad3804-2e7f-4b3b-a246-6d7d637a778a">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-      <span>Talk to sales</span>
+      <span>Ask a question</span>
     </a>
     <script is:inline>
       (function () {
-        var btn = document.getElementById('sales-chat');
+        var btn = document.getElementById('ask-chat');
         if (!btn) return;
         var started = false;
         function load() {
