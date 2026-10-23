@@ -212,10 +212,5 @@ table.t tbody tr:hover > .us { background: var(--accent-soft); }
 .finep { margin-top: 20px; font-size: 13.5px; color: var(--ink-3); line-height: 1.55; }
 .finep a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
-.ask-btn { position: fixed; right: 20px; bottom: 20px; z-index: 40; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px 0 15px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 14px; text-decoration: none; box-shadow: 0 6px 20px rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .18); transition: background .15s, transform .15s; }
-.ask-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
-.ask-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.ask-btn[hidden] { display: none; }
-@media (max-width: 560px) { .ask-btn { right: 14px; bottom: 14px; width: 48px; height: 48px; padding: 0; justify-content: center; } .ask-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; } }
 @media (forced-colors: active) { .btn { border: 1px solid ButtonText; } }
