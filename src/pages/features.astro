@@ -11,7 +11,7 @@ const groups = [
   { icon: 'target', t: 'Goals and events', d: 'Custom events with properties, and page goals. Script variants add outbound links, file downloads, form submissions and tagged click events, and filtering by a goal switches the dashboard to conversion mode.' },
   { icon: 'users', t: 'Sharing and people', d: 'Make a dashboard public, or create private shared links with an optional password. Show your own logo, name and color on public pages. Give people owner, admin or viewer roles per site, and protect accounts with two-factor sign-in.' },
   { icon: 'shield', t: 'Shields and retention', d: 'Block traffic by IP address, country or page, and count only your own hostnames. Retention rules delete raw data older than a number of days, on a schedule.' },
-  { icon: 'key', t: 'API and export', d: 'A Stats API that follows Plausible’s query format, with bearer-token API keys, and an Events API at POST /api/event that is compatible with Plausible’s. Export the dashboard as CSV for any period and filter, or download a site’s full raw data to move it between installs.' },
+  { icon: 'key', t: 'API and export', d: 'A Stats API that follows Plausible’s query format, with bearer-token API keys, and an Events API at POST /api/event that is compatible with Plausible’s. Export the dashboard as CSV for any period and filter, or download a site’s full raw data to move it between installs. Import your history from Plausible’s CSV export.' },
   { icon: 'server', t: 'Run it your way', d: 'Tidemark Cloud hosts it for you. Or install it yourself on PHP 8.3+ with SQLite, MySQL, MariaDB or PostgreSQL: a web installer, one-click updates, and real client IPs and countries read from Cloudflare or a similar CDN.' },
 ];
 
@@ -29,7 +29,7 @@ const groups = [
         </section>
       ))}
     </div>
-    <div class="notice" style="margin-top:16px"><Icon name="info" /><span>Not built yet: funnels, session replay and imports from other analytics tools (you can move a site between Tidemark installs). We would rather say so than imply otherwise.</span></div>
+    <div class="notice" style="margin-top:16px"><Icon name="info" /><span>Not built yet: funnels, session replay and imports from tools other than Plausible (you can import Plausible’s export, and move a site between Tidemark installs). We would rather say so than imply otherwise.</span></div>
   </div>
   </section>
   <ClosingCta />
