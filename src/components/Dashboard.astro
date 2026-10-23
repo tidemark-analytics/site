@@ -5,12 +5,12 @@ const N = 28;
 const rnd = (seed: number) => () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
 const make = (seed: number, base: number, amp: number, trend: number) => { const r = rnd(seed); return Array.from({ length: N }, (_, i) => Math.round(base + trend * i + (r() - 0.5) * amp + (i % 7 > 4 ? -amp * 0.25 : 0))); };
 const metrics = [
-  { k: 'Unique visitors', v: '4,300', d: '86.8%', dir: 'up', prev: 'vs 2.3K', data: make(7, 120, 90, 3.2), series: 'Unique visitors' },
-  { k: 'Total visits', v: '4,300', d: '86.8%', dir: 'up', prev: 'vs 2.3K', data: make(11, 118, 88, 3.1), series: 'Total visits' },
-  { k: 'Total pageviews', v: '11K', d: '84.8%', dir: 'up', prev: 'vs 5.9K', data: make(13, 310, 200, 8), series: 'Total pageviews' },
-  { k: 'Views per visit', v: '2.56', d: '0.8%', dir: 'down', prev: 'vs 2.58', data: make(17, 2.5, 0.5, 0.004).map((n) => Math.round(n * 100) / 100), series: 'Views per visit' },
-  { k: 'Bounce rate', v: '35%', d: '0%', dir: 'flat', prev: 'vs 35%', data: make(19, 35, 10, 0), series: 'Bounce rate' },
-  { k: 'Visit duration', v: '2m 15s', d: '1.5%', dir: 'down', prev: 'vs 2m 17s', data: make(23, 135, 40, 0.1), series: 'Visit duration' },
+  { k: 'Unique visitors', v: '4,300', d: '86.8%', dir: 'up', data: make(7, 120, 90, 3.2), series: 'Unique visitors' },
+  { k: 'Total visits', v: '4,300', d: '86.8%', dir: 'up', data: make(11, 118, 88, 3.1), series: 'Total visits' },
+  { k: 'Total pageviews', v: '11K', d: '84.8%', dir: 'up', data: make(13, 310, 200, 8), series: 'Total pageviews' },
+  { k: 'Views per visit', v: '2.56', d: '0.8%', dir: 'down', data: make(17, 2.5, 0.5, 0.004).map((n) => Math.round(n * 100) / 100), series: 'Views per visit' },
+  { k: 'Bounce rate', v: '35%', d: '0%', dir: 'flat', data: make(19, 35, 10, 0), series: 'Bounce rate' },
+  { k: 'Visit duration', v: '2m 15s', d: '1.5%', dir: 'down', data: make(23, 135, 40, 0.1), series: 'Visit duration' },
 ];
 const niceStep = (m: number) => { const raw = m / 4, p = 10 ** Math.floor(Math.log10(raw)); return [1, 2, 2.5, 5, 10].map((f) => f * p).find((v) => v >= raw)!; };
 const charts = metrics.map((m) => {
@@ -39,8 +39,8 @@ const fmt = (n: number) => n.toLocaleString('en-US');
     <div class="metric-tabs" role="tablist" aria-label="Metric">
       {charts.map((m, i) => (
         <button class={`metric ${i === 0 ? 'on' : ''}`} role="tab" aria-selected={i === 0} data-i={i} type="button">
-          <span class="k">{m.k}</span><span class="v">{m.v}</span>
-          <span class="d"><span class={`delta ${m.dir}`}>{m.dir === 'up' && <Icon name="arrow-up" />}{m.dir === 'down' && <Icon name="arrow-down" />}{m.d}</span><span class="prevv">{m.prev}</span></span>
+          <span class="k">{m.k}</span>
+          <span class="vd"><span class="v">{m.v}</span><span class="d"><span class={`delta ${m.dir}`}>{m.dir === 'up' && <Icon name="arrow-up" />}{m.dir === 'down' && <Icon name="arrow-down" />}{m.d}</span></span></span>
         </button>
       ))}
     </div>
@@ -82,14 +82,15 @@ const fmt = (n: number) => n.toLocaleString('en-US');
   .toolbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .toolbar .sp { flex: 1; } .site b { font-weight: 600; } .live { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-3); margin-left: 6px; } .live b { color: var(--ink); }
   .metric-tabs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); border-bottom: 1px solid var(--line); }
-  .metric { text-align: left; background: none; border: 0; border-right: 1px solid var(--line); padding: 16px 18px 14px; cursor: pointer; position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; font: inherit; color: inherit; transition: background .12s; }
+  .metric { text-align: left; background: none; border: 0; border-right: 1px solid var(--line); padding: 15px 18px; cursor: pointer; position: relative; display: flex; flex-direction: column; gap: 6px; min-width: 0; container-type: inline-size; font: inherit; color: inherit; transition: background .12s; }
   .metric:last-child { border-right: 0; } .metric:hover { background: var(--surface-2); }
   .metric::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--series-1); transform: scaleX(0); transition: transform .2s var(--ease); } .metric.on::after { transform: scaleX(1); }
-  .metric .k { font-size: 12.5px; color: var(--ink-3); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .metric.on .k { color: var(--accent-ink); }
-  .metric .v { font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .metric .d { display: flex; align-items: center; gap: 8px; min-height: 22px; font-size: 12px; } .prevv { color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .delta { font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 3px; padding: 0 7px; height: 20px; border-radius: 999px; font-variant-numeric: tabular-nums; }
-  .delta .ico { width: 12px; height: 12px; vertical-align: 0; } .delta.up { background: var(--good-soft); color: var(--good); } .delta.down { background: var(--bad-soft); color: var(--bad); } .delta.flat { background: var(--surface-2); color: var(--ink-3); }
+  .metric .k { line-height: 1.25; font-size: 12.5px; color: var(--ink-3); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .metric.on .k { color: var(--accent-ink); }
+  .metric .v { font-size: clamp(13px, calc((100cqw - 60px) / 4.5), 24px); line-height: 1.15; font-weight: 600; letter-spacing: -.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .metric .vd { display: flex; align-items: baseline; flex-wrap: nowrap; gap: 6px; min-width: 0; white-space: nowrap; }
+  .metric .d { display: flex; align-items: center; font-size: 12px; }
+  .delta { font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 2px; font-variant-numeric: tabular-nums; }
+  .delta .ico { width: 11px; height: 11px; vertical-align: 0; } .delta.up { color: var(--good); } .delta.down { color: var(--bad); } .delta.flat { color: var(--ink-3); }
   .plot-wrap { padding: 22px 22px 6px 22px; }
   .plot { position: relative; height: 230px; margin-left: 38px; } .plot[hidden] { display: none; }
   .plot svg { width: 100%; height: 100%; display: block; overflow: visible; }
@@ -106,8 +107,9 @@ const fmt = (n: number) => n.toLocaleString('en-US');
   .mrow { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 8px; border-radius: 6px; min-height: 32px; }
   .mrow .bar { position: absolute; inset: 2px auto 2px 0; background: var(--series-1-wash); border-radius: 5px; z-index: 0; }
   .mrow .l, .mrow .r { position: relative; z-index: 1; } .mrow .l { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .mrow .r { font-variant-numeric: tabular-nums; font-weight: 560; }
-  @media (max-width: 900px) { .metric-tabs { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); } .metric { border-bottom: 1px solid var(--line); } .metric:nth-child(3n) { border-right: 0; } .metric.on::after { bottom: -1px; } .two { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 560px) { .metric-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .metric:nth-child(3n) { border-right: 1px solid var(--line); } .metric:nth-child(2n) { border-right: 0; } .hide-s { display: none; } .plot-wrap { padding: 18px 14px 4px; } .metric .v { font-size: 22px; } .xlab span:nth-child(even) { display: none; } }
+  @media (max-width: 1140px) { .metric-tabs { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); } .metric { border-bottom: 1px solid var(--line); } .metric:nth-child(3n) { border-right: 0; } .metric.on::after { bottom: -1px; } }
+  @media (max-width: 900px) { .two { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .metric-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .metric:nth-child(3n) { border-right: 1px solid var(--line); } .metric:nth-child(2n) { border-right: 0; } .hide-s { display: none; } .plot-wrap { padding: 18px 14px 4px; } .xlab span:nth-child(even) { display: none; } }
 </style>
 <script>
   const root = document.querySelector('.dash');
