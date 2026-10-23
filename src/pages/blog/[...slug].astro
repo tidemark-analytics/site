@@ -67,6 +67,10 @@ const ld = [{
   .article :global(pre) { overflow-x: auto; padding: 14px 16px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.55; margin: 14px 0 20px; }
   .article :global(code) { font-family: var(--mono); font-size: .9em; }
   .article :global(:not(pre) > code) { background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+  .article :global(ul.contains-task-list) { list-style: none; padding: 0; margin: 14px 0 20px; }
+  .article :global(li.task-list-item) { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  .article :global(li.task-list-item:last-child) { border-bottom: 0; }
+  .article :global(li.task-list-item input) { appearance: none; flex: none; box-sizing: border-box; width: 18px; min-width: 18px; height: 18px; margin: 2px 0 0; border: 1.5px solid var(--line-2); border-radius: 5px; background: var(--surface); }
   .article :global(blockquote) { margin: 18px 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--accent); color: var(--ink-2); }
   .cta { max-width: 720px; margin-top: 44px; padding: 26px 28px; }
   .cta h2 { font-size: 21px; letter-spacing: -.02em; } .cta p { color: var(--ink-2); margin: 8px 0 18px; }
