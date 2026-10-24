@@ -29,6 +29,7 @@ export const site = {
   releaseUrl: `https://github.com/${repo}/releases/tag/v${version}`, // this release's notes and downloads
   demoUrl: 'https://app.tidemarkanalytics.com/tidemarkanalytics.com', // this site's own public Tidemark dashboard; empty hides the demo button
   docsUrl: 'https://docs.tidemarkanalytics.com',
+  discordUrl: 'https://discord.gg/sCkHD3PPZh', // community server invite (never expires)
   installDocsUrl: 'https://docs.tidemarkanalytics.com/article/101-install-shared-hosting',
   dockerDocsUrl: 'https://docs.tidemarkanalytics.com/article/137-install-with-docker',
   dockerImage: 'ghcr.io/tidemark-analytics/tidemark',
